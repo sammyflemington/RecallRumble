@@ -25,9 +25,7 @@ object ProfileScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        ProfileScreen(viewModel.user){
-            navController.navigate(EditProfileScreenSpec.route)
-        }
+        ProfileScreen(viewModel.user, onEditProfileClicked = { navController.navigate(EditProfileScreenSpec.route) }, onViewFriendsClicked = { navController.navigate(FriendsScreenSpec.route)})
     }
 
     @Composable

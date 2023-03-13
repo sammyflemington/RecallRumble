@@ -50,5 +50,13 @@ fun UserCard(user: User) {
             Text(text = "Games Won: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
             Text(text = user.gamesWon.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
         }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
+                .background(color = MaterialTheme.colorScheme.primaryContainer)) {
+            Text(text = "Games Lost: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+            Text(text = user.gamesLost.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+        }
     }
 }

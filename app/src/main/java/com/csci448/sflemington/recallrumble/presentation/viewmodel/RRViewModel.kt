@@ -1,8 +1,10 @@
 package com.csci448.sflemington.recallrumble.presentation.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
+import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 
 class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel{
@@ -18,12 +20,13 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         get() = mUser.value
 
     override val leaderBoard: List<User>
-        get() = mLeaderboard.toList()
+        get() = mLeaderboard.toList().sortedBy { it.rank }
 
     private val mName = mutableStateOf(user.name)
     private val mUserName = mutableStateOf(user.username)
 
     override fun onUserProfileSaved(name : String, username : String){
+        Log.d(LOG_TAG, "onUserProfileSaved called")
         mName.value = name
         mUserName.value = username
         mUser.value = User(name = mName.value, username = mUserName.value, user.friends, user.rank, user.gamesWon, user.gamesLost)
