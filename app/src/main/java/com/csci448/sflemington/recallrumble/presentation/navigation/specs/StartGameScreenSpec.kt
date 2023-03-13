@@ -8,10 +8,10 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.presentation.screens.StartGameScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
 object StartGameScreenSpec : IScreenSpec{
-
     override val route = "start"
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args : String?) = route
@@ -24,7 +24,7 @@ object StartGameScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-
+        StartGameScreen(onStartGameClicked = { navController.navigate(CategoryListScreenSpec.route) } )
     }
 
     @Composable
