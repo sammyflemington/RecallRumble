@@ -1,9 +1,7 @@
 package com.csci448.sflemington.recallrumble.presentation.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -23,9 +21,10 @@ import com.csci448.sflemington.recallrumble.R
 //Landing Screen
 @Composable
 fun StartGameScreen(onStartGameClicked : () -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Spacer(modifier = Modifier.padding(50.dp))
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onStartGameClicked() },
             contentPadding = PaddingValues(20.dp),
             shape = RoundedCornerShape(10.dp)
         ) {
