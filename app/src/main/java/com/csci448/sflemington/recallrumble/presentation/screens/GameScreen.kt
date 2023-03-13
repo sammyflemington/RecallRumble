@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -78,6 +79,7 @@ fun GameScreen(view: RRViewModel) {
                 }
             }
             Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}")
+            Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0))
             QuestionDisplayGame(view)
         }
 }
@@ -90,7 +92,7 @@ fun PreviewGameScreen() {
     val leaderboard = listOf<User>(player1, player2)
     val view = RRViewModel(player1, leaderboard)
     //val question = Question(answerChoices = listOf("", " "))
-    val questions = listOf<Question>(Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
+    val questions = listOf<Question>(Question(answerChoices = listOf("Apple", "Banana")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
     val quiz = Quiz("myQuiz", questions, Category(com.csci448.sflemington.recallrumble.R.string.category_geography, com.csci448.sflemington.recallrumble.R.drawable.geography_graphic),)
     val quizPlay = QuizPlay(quiz, player1, player2)
     view.newQuizPlay(quizPlay)
