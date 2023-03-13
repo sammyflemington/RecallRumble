@@ -11,10 +11,10 @@ import com.csci448.sflemington.recallrumble.presentation.components.UserCard
 
 
 @Composable
-fun ProfileScreen(user: User) {
+fun ProfileScreen(user: User, onEditProfileClicked : () -> Unit) {
     Column() {
         UserCard(user)
-        Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+        Button(onClick = { onEditProfileClicked() }, colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
             Text(text = "Edit Profile")
         }
     }

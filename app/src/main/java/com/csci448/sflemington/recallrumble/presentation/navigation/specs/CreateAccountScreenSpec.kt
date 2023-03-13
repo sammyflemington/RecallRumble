@@ -25,7 +25,7 @@ object CreateAccountScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        CreateAccountScreen()
+        CreateAccountScreen(viewModel.user, onUserProfileSaved = {name, username -> viewModel.onUserProfileSaved(name, username)})
     }
 
     @Composable

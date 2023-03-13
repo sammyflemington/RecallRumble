@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.StateFlow
 interface IViewModel {
     val user: User
     val leaderBoard: List<User>
+    fun onUserProfileSaved (name: String, username: String)
 }

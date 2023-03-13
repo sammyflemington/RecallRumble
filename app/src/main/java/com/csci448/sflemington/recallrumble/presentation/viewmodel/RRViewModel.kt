@@ -19,4 +19,13 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     override val leaderBoard: List<User>
         get() = mLeaderboard.toList()
+
+    private val mName = mutableStateOf(user.name)
+    private val mUserName = mutableStateOf(user.username)
+
+    override fun onUserProfileSaved(name : String, username : String){
+        mName.value = name
+        mUserName.value = username
+        mUser.value = User(name = mName.value, username = mUserName.value, user.friends, user.rank, user.gamesWon, user.gamesLost)
+    }
 }

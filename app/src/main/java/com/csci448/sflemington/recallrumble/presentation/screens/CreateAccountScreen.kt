@@ -20,10 +20,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.data.user.User
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateAccountScreen() {
+fun CreateAccountScreen(user : User, onUserProfileSaved: (String, String) -> Unit) {
     val notif = rememberSaveable { mutableStateOf("") }
     if (notif.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notif.value, Toast.LENGTH_LONG).show()
@@ -39,7 +40,7 @@ fun CreateAccountScreen() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = "Cancel", modifier = Modifier.clickable { notif.value = "Cancelled" })
-            Text(text = "Save", modifier = Modifier.clickable { notif.value = "Saved" })
+            Text(text = "Save", modifier = Modifier.clickable {onUserProfileSaved(name, username)})
         }
 
         AccountImage()
@@ -113,11 +114,11 @@ fun AccountImage() {
     }
 }
 
-@Preview
-@Composable
-fun CreateAccountScreenPreview() {
-    CreateAccountScreen()
-}
+//@Preview
+//@Composable
+//fun CreateAccountScreenPreview() {
+//    CreateAccountScreen(onNewName = {}, onNewUserName = {})
+//}
 
 
 
