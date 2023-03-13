@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.csci448.sflemington.recallrumble.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateAccountScreen() {
     val notif = rememberSaveable { mutableStateOf("") }
@@ -52,7 +53,7 @@ fun CreateAccountScreen() {
             TextField(
                 value = name,
                 onValueChange = { name = it },
-                colors = TextFieldDefaults.textFieldColors(textColor = Color.Black)
+                colors = TextFieldDefaults.textFieldColors(Color.Black)
             )
         }
 
@@ -67,7 +68,7 @@ fun CreateAccountScreen() {
             TextField(
                 value = username,
                 onValueChange = { username = it },
-                colors = TextFieldDefaults.textFieldColors(textColor = Color.Black)
+                colors = TextFieldDefaults.textFieldColors(Color.Black)
             )
         }
 

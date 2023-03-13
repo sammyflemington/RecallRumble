@@ -21,7 +21,7 @@ object StartGameScreenSpec : IScreenSpec{
     override fun Content(
         viewModel: IViewModel,
         navController: NavHostController,
-        navBackStackEntry: NavBackStackEntry,
+        navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
 

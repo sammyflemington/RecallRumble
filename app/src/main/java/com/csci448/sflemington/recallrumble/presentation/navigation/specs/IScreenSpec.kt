@@ -31,9 +31,9 @@ sealed interface IScreenSpec {
         val startDestination = StartGameScreenSpec.route
 
         @Composable
-        fun TopBar(samodelkinViewModel: IViewModel, navController: NavHostController, navBackStackEntry: NavBackStackEntry?){
+        fun TopBar(viewModel: IViewModel, navController: NavHostController, navBackStackEntry: NavBackStackEntry?){
             val route = navBackStackEntry?.destination?.route ?: ""
-            allScreens[route]?.TopAppBarContent(samodelkinViewModel, navController, navBackStackEntry)
+            allScreens[route]?.TopAppBarContent(viewModel, navController, navBackStackEntry)
         }
 
         @Composable

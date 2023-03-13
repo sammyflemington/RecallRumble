@@ -8,6 +8,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.presentation.screens.ProfileScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
 object ProfileScreenSpec : IScreenSpec{
@@ -20,10 +21,10 @@ object ProfileScreenSpec : IScreenSpec{
     override fun Content(
         viewModel: IViewModel,
         navController: NavHostController,
-        navBackStackEntry: NavBackStackEntry,
+        navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-
+        ProfileScreen()
     }
 
     @Composable
