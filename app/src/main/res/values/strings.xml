@@ -3,4 +3,12 @@
 
     <!-- menus -->
     <string name="menu_back_desc">Back</string>
+
+    <!-- categories -->
+    <string name="category_geography">Geography</string>
+    <string name="category_history">History</string>
+    <string name="category_science">Science</string>
+    <string name="category_popculture">Pop Culture</string>
+    <string name="category_movies">Movies</string>
+    <string name="category_sports">Sports</string>
 </resources>

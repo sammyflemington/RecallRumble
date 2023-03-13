@@ -13,9 +13,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
+import com.csci448.sflemington.recallrumble.data.CategoryRepository
 import com.csci448.sflemington.recallrumble.presentation.navigation.RRBottomBar
 import com.csci448.sflemington.recallrumble.presentation.navigation.RRNavHost
 import com.csci448.sflemington.recallrumble.presentation.navigation.RRTopBar
+import com.csci448.sflemington.recallrumble.presentation.screens.CategoryListScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModelFactory
@@ -77,6 +79,7 @@ private fun MainActivityContent(viewModel: IViewModel) {
                 }
             ){
                 val paddingValues = it
+                //CategoryListScreen(categories = CategoryRepository.categoryList)
                 RRNavHost(modifier = Modifier.padding(paddingValues), navController = navController, viewModel = viewModel, context = context)
             }
 
