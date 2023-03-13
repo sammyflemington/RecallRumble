@@ -91,18 +91,6 @@ sealed interface IScreenSpec {
     @Composable
     private fun TopAppBarContent(viewModel: IViewModel, navController: NavHostController, navBackStackEntry: NavBackStackEntry?){
         TopAppBar(
-            navigationIcon = if (navController.previousBackStackEntry != null){
-                {
-                    IconButton(onClick = {navController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.menu_back_desc)
-                        )
-                    }
-                }
-            }else{
-                {}
-            },
             title = {
                 Text(text = stringResource(title))
             },

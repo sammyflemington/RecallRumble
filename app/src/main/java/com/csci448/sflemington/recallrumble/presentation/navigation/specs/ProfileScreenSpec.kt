@@ -2,6 +2,7 @@ package com.csci448.sflemington.recallrumble.presentation.navigation.specs
 
 import android.content.Context
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
@@ -16,7 +17,7 @@ object ProfileScreenSpec : IScreenSpec{
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args : String?) = route
     override val title : Int = R.string.app_name
-    override val icon = Icons.Filled.PlayArrow
+    override val icon = Icons.Filled.Person
     @Composable
     override fun Content(
         viewModel: IViewModel,
@@ -24,7 +25,7 @@ object ProfileScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        ProfileScreen()
+        ProfileScreen(viewModel.user)
     }
 
     @Composable
