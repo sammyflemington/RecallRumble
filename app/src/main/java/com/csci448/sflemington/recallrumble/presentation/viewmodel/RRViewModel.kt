@@ -1,9 +1,14 @@
 package com.csci448.sflemington.recallrumble.presentation.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
+import com.csci448.sflemington.recallrumble.data.Category
+import com.csci448.sflemington.recallrumble.data.CategoryRepository
+import com.csci448.sflemington.recallrumble.data.Question
+import com.csci448.sflemington.recallrumble.data.QuizPlay
 import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 
@@ -16,11 +21,32 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     private val mLeaderboard = leaderBoard.toMutableStateList()
 
+    private val mCategoryList = CategoryRepository.categoryList
+
     override val user: User
         get() = mUser.value
 
     override val leaderBoard: List<User>
         get() = mLeaderboard.toList().sortedBy { it.rank }
+
+    override val categoryList: List<Category>
+        get() = mCategoryList
+
+    private val mCurrentQuestionIndex : MutableState<Int> = mutableStateOf(0)
+
+    val currentQuestionNumber : Int
+        get() = mCurrentQuestionIndex.value + 1
+
+    private val mCurrentQuestion : MutableState<Question?> = mutableStateOf(null)
+
+    val currentQuestionState : Question?
+        get() = mCurrentQuestion.value
+
+    //Add to IViewModel?
+    private val mCurrentGame : MutableState<QuizPlay?> = mutableStateOf(null)
+
+    val currentGame: QuizPlay?
+        get() = mCurrentGame.value
 
     private val mName = mutableStateOf(user.name)
     private val mUserName = mutableStateOf(user.username)
@@ -31,4 +57,24 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         mUserName.value = username
         mUser.value = User(name = mName.value, username = mUserName.value, user.friends, user.rank, user.gamesWon, user.gamesLost)
     }
+    fun newQuizPlay(quizPlay: QuizPlay) {
+        mCurrentGame.value = quizPlay
+        mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
+        //mCurrentQuizQuestionCount.value = quizPlay.quiz.quizQuestionCount
+    }
 }
+
+
+//    override val currentQuizQuestionCount: Int
+//        get() = mCurrentQuizQuestionCount.value
+// private val mCurrentQuizQuestionCount: MutableState<Int> = mutableStateOf(10)
+
+    //There is probably a more efficient way to track players scores
+//    private val mPlayer1Score: MutableState<Int> = mutableStateOf(0)
+//    private val mPlayer2Score: MutableState<Int> = mutableStateOf(0)
+//
+//    val player1Score : Int
+//        get() = mPlayer1Score.value
+//
+//    val player2Score : Int
+//        get() = mPlayer2Score.value

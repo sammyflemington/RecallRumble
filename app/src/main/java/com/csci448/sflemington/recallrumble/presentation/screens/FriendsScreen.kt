@@ -12,7 +12,7 @@ import com.csci448.sflemington.recallrumble.presentation.components.UserList
 fun FriendsScreen(user: User) {
     Column() {
         Text(text = "Friends", fontSize = 28.sp)
-        UserList(userList = user.friends, leaderboardFlag = false)
+        user.friends?.let { UserList(userList = it, leaderboardFlag = false) }
     }
 }
 
