@@ -21,8 +21,7 @@ import com.csci448.sflemington.recallrumble.R
 //Landing Screen
 @Composable
 fun StartGameScreen(onStartGameClicked : () -> Unit) {
-    Spacer(modifier = Modifier.padding(50.dp))
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Button(
             onClick = { onStartGameClicked() },
             contentPadding = PaddingValues(20.dp),
