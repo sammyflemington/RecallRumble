@@ -18,20 +18,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.csci448.sflemington.recallrumble.R
 import com.csci448.sflemington.recallrumble.data.user.User
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateAccountScreen(user : User, onUserProfileSaved: (String, String) -> Unit) {
+fun CreateAccountScreen(
+    user: User,
+    onUserProfileSaved: (String, String) -> Unit,
+    onUserProfileCancelled: () -> Boolean
+) {
     val notif = rememberSaveable { mutableStateOf("") }
     if (notif.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notif.value, Toast.LENGTH_LONG).show()
         notif.value = ""
     }
-    var name by rememberSaveable { mutableStateOf("Name") }
-    var username by rememberSaveable { mutableStateOf("Username") }
+    var name by rememberSaveable { mutableStateOf(user.name) }
+    var username by rememberSaveable { mutableStateOf(user.username) }
     //var bio by rememberSaveable { mutableStateOf("Bio") }
     Column() {
         Row(modifier = Modifier
@@ -39,7 +42,7 @@ fun CreateAccountScreen(user : User, onUserProfileSaved: (String, String) -> Uni
             .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Cancel", modifier = Modifier.clickable { notif.value = "Cancelled" })
+            Text(text = "Cancel", modifier = Modifier.clickable { onUserProfileCancelled() } )
             Text(text = "Save", modifier = Modifier.clickable {onUserProfileSaved(name, username)})
         }
 

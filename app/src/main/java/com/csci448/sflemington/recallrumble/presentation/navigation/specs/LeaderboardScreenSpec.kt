@@ -9,6 +9,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.presentation.screens.LeaderboardScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
 object LeaderboardScreenSpec : IScreenSpec {
@@ -24,7 +25,7 @@ object LeaderboardScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-
+        LeaderboardScreen(leaderBoard = viewModel.leaderBoard)
     }
 
     @Composable
