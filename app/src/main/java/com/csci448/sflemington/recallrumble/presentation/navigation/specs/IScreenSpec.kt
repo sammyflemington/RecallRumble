@@ -55,7 +55,7 @@ sealed interface IScreenSpec {
                             viewModel.setViewedUser(viewModel.user)
                                   },
                         label = {
-
+                            screen.title
                         },
                         icon = {
                             Icon(
@@ -70,7 +70,7 @@ sealed interface IScreenSpec {
 
         private val bottomNavItems : List<IScreenSpec> = listOf(
             LeaderboardScreenSpec,
-            QuizCreationScreenSpec,
+            QuizCreationLandingPageSpec,
             StartGameScreenSpec,
             ProfileScreenSpec
         )
