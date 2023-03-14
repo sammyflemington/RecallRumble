@@ -39,10 +39,6 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val currentQuestionState: Question?
         get() = mCurrentQuestion.value
 
-//    private val mQuestionStatus : MutableState<QuestionStatus> = mutableStateOf(QuestionStatus.UNANSWERED)
-//    override val currentQuestionStatus : QuestionStatus
-//        get() = mQuestionStatus.value
-
     //Add to IViewModel?
     private val mCurrentGame: MutableState<QuizPlay?> = mutableStateOf(null)
 
@@ -83,27 +79,3 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     }
 }
-//    override fun updateStatus(correct: Boolean) {
-//        if(correct)  {
-//            mQuestionStatus.value =  QuestionStatus.ANSWERED_CORRECT
-//        }
-//        if(!correct)  {
-//            mQuestionStatus.value =  QuestionStatus.ANSWERED_INCORRECT
-//        }
-//    }
-
-
-
-//    override val currentQuizQuestionCount: Int
-//        get() = mCurrentQuizQuestionCount.value
-// private val mCurrentQuizQuestionCount: MutableState<Int> = mutableStateOf(10)
-
-    //There is probably a more efficient way to track players scores
-//    private val mPlayer1Score: MutableState<Int> = mutableStateOf(0)
-//    private val mPlayer2Score: MutableState<Int> = mutableStateOf(0)
-//
-//    val player1Score : Int
-//        get() = mPlayer1Score.value
-//
-//    val player2Score : Int
-//        get() = mPlayer2Score.value

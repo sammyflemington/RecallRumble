@@ -2,15 +2,9 @@ package com.csci448.sflemington.recallrumble.presentation.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 //import com.csci448.sflemington.recallrumble.presentation.components.QuestionDisplayGame
-import androidx.compose.foundation.layout.R
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.csci448.sflemington.recallrumble.data.*
@@ -35,53 +30,83 @@ fun GameScreen(view: IViewModel) {
     val orientation = LocalConfiguration.current.orientation
     val currentContext = LocalContext.current
     Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            //Seperate this code with a composable passing in each player? Using UserProfileBrief?
-            Row() {
-                Image(painter = painterResource(id = com.csci448.sflemington.recallrumble.R.drawable.user),contentDescription = null)
-                Column() {
-                    Text(text = view.currentGame?.player1?.username ?: "null",fontSize = 20.sp,color = MaterialTheme.colorScheme.primary)
-                    Row() {
-                        Text(
-                            text = "Score: ",
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        Text(
-                            text = view.currentGame?.player1Score.toString(),
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-                Text(text = "VS", color = Color.Red)
-                Image(painter = painterResource(id = com.csci448.sflemington.recallrumble.R.drawable.user),contentDescription = null)
-                Column() {
-                    Text(
-                        text = view.currentGame?.player2?.username ?: "null",
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colorScheme.primary
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        //Seperate this code with a composable passing in each player? Using UserProfileBrief?
+        Row() {
+            Card(
+                modifier = Modifier
+                    .width(180.dp)
+                    .padding(5.dp)
+            ) {
+                Row() {
+                    Image(
+                        painter = painterResource(id = com.csci448.sflemington.recallrumble.R.drawable.user),
+                        contentDescription = null,
+                        modifier = Modifier.size(60.dp)
                     )
-                    Row() {
+                    Column() {
                         Text(
-                            text = "Score: ",
+                            text = view.currentGame?.player1?.username ?: "null",
                             fontSize = 16.sp,
                             color = MaterialTheme.colorScheme.primary
                         )
-                        Text(
-                            text = view.currentGame?.player1Score.toString(),
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                        Row() {
+                            Text(
+                                text = "Score: ",
+                                fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = view.currentGame?.player1Score.toString(),
+                                fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                 }
             }
-            Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}")
-            Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0))
-            QuestionDisplayGame(view)
+            Card(
+                modifier = Modifier
+                    .width(180.dp)
+                    .padding(5.dp)
+            ) {
+                Row() {
+                    Image(
+                        painter = painterResource(id = com.csci448.sflemington.recallrumble.R.drawable.user),
+                        contentDescription = null,
+                        modifier = Modifier.size(60.dp)
+                    )
+                    Column() {
+                        Text(
+                            text = view.currentGame?.player2?.username ?: "null",
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Row() {
+                            Text(
+                                text = "Score: ",
+                                fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = view.currentGame?.player1Score.toString(),
+                                fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
+            }
         }
+        Row() {
+            Text(text = "VS", fontSize = 26.sp, color = Color.Red)
+        }
+            Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0), fontSize = 33.sp)
+            Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}", fontSize = 23.sp)
+            QuestionDisplayGame(view)
+    }
 }
 
 @Preview

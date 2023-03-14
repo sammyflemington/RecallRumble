@@ -42,21 +42,21 @@
     <string name = "pop_q1_choice4">Cobra Kai</string>
 
     <!-- Science Questions -->
-    <string name="science_q1">What element has the symbol Ag</string>
+    <string name="science_q1">What element has the symbol Ag?</string>
     <string name="sci_q1_choice1">Asparagus</string>
     <string name = "sci_q1_choice2">Argon</string>
     <string name = "sci_q1_choice3">Gold</string>
     <string name = "sci_q1_choice4">Silver</string>
 
     <!-- Sports Questions -->
-    <string name="sport_q1">Which state is associated with the slogan "State of Hockey"</string>
+    <string name="sport_q1">Which state is associated with the slogan "State of Hockey"?</string>
     <string name="sport_q1_choice1">Michigan</string>
     <string name = "sport_q1_choice2">Massachusetts </string>
     <string name = "sport_q1_choice3">New York</string>
     <string name = "sport_q1_choice4">Minnesota</string>
 
     <!-- Movie Questions -->
-    <string name="movie_q1">Which actor does not play Spiderman</string>
+    <string name="movie_q1">Which actor does not play Spider-Man?</string>
     <string name="movie_q1_choice1">Tom Holland</string>
     <string name = "movie_q1_choice2">Tony Stark</string>
     <string name = "movie_q1_choice3">Andrew Garfield</string>

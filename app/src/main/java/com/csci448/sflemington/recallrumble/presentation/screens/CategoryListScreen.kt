@@ -27,14 +27,17 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 @Composable
 //RRViewModel?
 fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, view: IViewModel) {
+    Column(modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.width(300.dp)
         ) {
             items(categories) {
                 Card(modifier = Modifier
-                        .padding(11.dp)
-                        .height(122.dp)
+                    .padding(11.dp)
+                    .height(122.dp)
                     .clickable {
                         //val questions = listOf<Question>(Question(answerChoices = listOf("Apple", "Banana")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
                         val quiz = Quiz("myQuiz", it.questionList, it)
@@ -43,8 +46,10 @@ fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, v
                         selectCategory()
                     }
                 ) {
-                    Column(Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally)
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
                     {
                         Text(
                             text = stringResource(id = it.category),
@@ -56,6 +61,7 @@ fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, v
                 }
             }
         }
+    }
 }
 
 
