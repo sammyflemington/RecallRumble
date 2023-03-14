@@ -25,7 +25,10 @@ object EditProfileScreenSpec: IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        CreateAccountScreen(viewModel.user, onUserProfileSaved = {name, username -> viewModel.onUserProfileSaved(name, username)}) { navController.navigateUp() }
+        CreateAccountScreen(viewModel.user, onUserProfileSaved = {name, username ->
+            viewModel.onUserProfileSaved(name, username)
+            navController.navigate(ProfileScreenSpec.buildRoute(viewModel.user.id.toString()))
+        }) { navController.navigateUp() }
     }
 
     @Composable

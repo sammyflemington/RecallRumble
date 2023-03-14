@@ -3,7 +3,14 @@
 
     <!-- menus -->
     <string name="menu_back_desc">Back</string>
+
     <string name="default_question_prompt">Default Question Prompt</string>
+
+
+    <string name="edit_profile">Edit Profile</string>
+    <string name="view_friends">View Friends</string>
+    <string name="challenge_friend">Invite to Play</string>
+    <string name="not_yet_implemented">This feature is not yet implemented.</string>
 
     <!-- categories -->
     <string name="category_geography">Geography</string>

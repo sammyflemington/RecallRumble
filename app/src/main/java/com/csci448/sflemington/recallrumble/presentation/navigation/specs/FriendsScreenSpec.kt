@@ -24,7 +24,7 @@ object FriendsScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        FriendsScreen(user = viewModel.user)
+        FriendsScreen(user = viewModel.user, viewModel = viewModel, navController = navController)
     }
 
     @Composable
