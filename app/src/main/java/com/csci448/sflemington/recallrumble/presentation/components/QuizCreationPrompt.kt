@@ -22,9 +22,9 @@ fun QuizCreationPrompt(text: String, questionIndex: Int, onEditButtonClicked : (
     var prompt by rememberSaveable { mutableStateOf(text) }
     Card(){
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
-            IconButton(onClick = onEditButtonClicked ){
-                Icon(imageVector = Icons.Filled.Edit, contentDescription = null)
-            }
+//            IconButton(onClick = onEditButtonClicked ){
+//                Icon(imageVector = Icons.Filled.Edit, contentDescription = null)
+//            }
             Column() {
                 Text(text = "Question " + (questionIndex + 1), fontSize = 20.sp)
                 TextField(value = prompt, onValueChange = {prompt = it})
