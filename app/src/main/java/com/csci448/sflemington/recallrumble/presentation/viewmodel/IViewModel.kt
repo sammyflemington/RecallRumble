@@ -11,11 +11,6 @@ interface IViewModel {
     val currentGame: QuizPlay?
     val currentQuestionNumber : Int
     val currentQuestionState : Question?
-    //val currentQuestionStatus : QuestionStatus?
-    // Both question index and question count can be changed when Quiz class is implemented
-    // to hold a current quiz state
-    //val currentQuestionIndex: Int
-    //val currentQuizQuestionCount: Int
     fun onUserProfileSaved (name: String, username: String)
     fun newQuizPlay(quizPlay: QuizPlay)
     //fun updateStatus(correct: Boolean)
