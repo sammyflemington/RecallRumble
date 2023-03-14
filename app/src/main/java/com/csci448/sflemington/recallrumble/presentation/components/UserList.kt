@@ -31,7 +31,10 @@ fun UserList(userList: List<User>, leaderboardFlag: Boolean, navController : Nav
     } else {
         LazyColumn {
             items(userList) { user ->
-                UserCard(user)
+                UserCardShort(user = user, onUserCardClicked = {
+                    viewModel.setViewedUser(user)
+                    navController.navigate(ProfileScreenSpec.buildRoute(user.id.toString()))
+                })
             }
         }
     }
