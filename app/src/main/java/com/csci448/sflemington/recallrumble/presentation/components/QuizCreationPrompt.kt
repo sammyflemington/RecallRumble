@@ -15,16 +15,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.csci448.sflemington.recallrumble.data.Question
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuizCreationQuestion(question: Question){
-
+fun QuizCreationPrompt(text: String, questionIndex: Int, onEditButtonClicked : () -> Unit) {
+    var prompt by rememberSaveable { mutableStateOf(text) }
+    Card(){
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
+            IconButton(onClick = onEditButtonClicked ){
+                Icon(imageVector = Icons.Filled.Edit, contentDescription = null)
+            }
+            Column() {
+                Text(text = "Question " + (questionIndex + 1), fontSize = 20.sp)
+                TextField(value = prompt, onValueChange = {prompt = it})
+            }
+        }
+    }
 }
 
 @Preview
 @Composable
-fun PreviewQuizCreationQuestion(){
-//    val q = Question(prompt = "Here is a question", answerChoices = listOf("Answer 1", "Answer 2", "Answer 3"), correctAnswerIndex = 1)
-//    QuizCreationQuestion(q)
+fun PreviewQuizCreationPrompt(){
+    val text = "Here is the text."
+    QuizCreationPrompt(text, 0){}
 }
