@@ -31,7 +31,7 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 
 @Composable
 //Do we want an IViewModel or an RRViewModel?
-fun GameScreen(view: RRViewModel) {
+fun GameScreen(view: IViewModel) {
     val orientation = LocalConfiguration.current.orientation
     val currentContext = LocalContext.current
     Column(
@@ -87,14 +87,14 @@ fun GameScreen(view: RRViewModel) {
 @Preview
 @Composable
 fun PreviewGameScreen() {
-    val player1 = User(name= "lexi", username = "lc", null, 4, 3, 1)
-    val player2 = User(name= "jack", username = "jl", null, 5, 23, 2)
-    val leaderboard = listOf<User>(player1, player2)
-    val view = RRViewModel(player1, leaderboard)
-    //val question = Question(answerChoices = listOf("", " "))
-    val questions = listOf<Question>(Question(answerChoices = listOf("Apple", "Banana")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
-    val quiz = Quiz("myQuiz", questions, Category(com.csci448.sflemington.recallrumble.R.string.category_geography, com.csci448.sflemington.recallrumble.R.drawable.geography_graphic),)
-    val quizPlay = QuizPlay(quiz, player1, player2)
-    view.newQuizPlay(quizPlay)
-    GameScreen(view)
+//    val player1 = User(name= "lexi", username = "lc", null, 4, 3, 1)
+//    val player2 = User(name= "jack", username = "jl", null, 5, 23, 2)
+//    val leaderboard = listOf<User>(player1, player2)
+//    val view = RRViewModel(player1, leaderboard)
+//    //val question = Question(answerChoices = listOf("", " "))
+//    val questions = listOf<Question>(Question(answerChoices = listOf(1, 2)), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
+//    val quiz = Quiz("myQuiz", questions, Category(com.csci448.sflemington.recallrumble.R.string.category_geography, com.csci448.sflemington.recallrumble.R.drawable.geography_graphic, emptyList()))
+//    val quizPlay = QuizPlay(quiz, player1, player2)
+//    view.newQuizPlay(quizPlay)
+//    GameScreen(view)
 }
