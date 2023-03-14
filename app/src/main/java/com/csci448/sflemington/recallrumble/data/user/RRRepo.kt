@@ -3,6 +3,7 @@ package com.csci448.sflemington.recallrumble.data.user
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.vector.ImageVector
 
 class RRRepo (context: Context?){
     companion object {
@@ -25,6 +26,9 @@ class RRRepo (context: Context?){
     val user : User
     val leaderBoard : List<User>
 
+    val profilePictures : List<ImageVector> = listOf(
+
+    )
     init {
         Log.d(LOG_TAG, "initializing repository list")
         user = User(

@@ -30,8 +30,8 @@ fun UserCard(user: User) {
                 .background(color = MaterialTheme.colorScheme.primaryContainer)) {
             Image(painter = painterResource(id = R.drawable.user),contentDescription = null)
             Column(Modifier.padding(4.dp)) {
-                Text(text = user.name,fontSize = 28.sp,color = MaterialTheme.colorScheme.primary)
-                Text(text = user.username,fontSize = 20.sp,color = MaterialTheme.colorScheme.primary)
+                Text(text = user.username,fontSize = 28.sp,color = MaterialTheme.colorScheme.primary)
+                Text(text = user.name,fontSize = 20.sp,color = MaterialTheme.colorScheme.primary)
             }
         }
         Row(

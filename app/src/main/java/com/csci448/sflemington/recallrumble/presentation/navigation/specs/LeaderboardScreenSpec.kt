@@ -25,7 +25,7 @@ object LeaderboardScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        LeaderboardScreen(leaderBoard = viewModel.leaderBoard)
+        LeaderboardScreen(leaderBoard = viewModel.leaderBoard, navController = navController, viewModel = viewModel)
     }
 
     @Composable

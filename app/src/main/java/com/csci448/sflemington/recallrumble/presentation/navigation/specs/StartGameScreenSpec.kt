@@ -24,7 +24,7 @@ object StartGameScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        StartGameScreen(onStartGameClicked = { navController.navigate("categoryList") } )
+        StartGameScreen(onStartGameClicked = { navController.navigate("categoryList") }, onInviteFriendClicked = {navController.navigate(FriendsScreenSpec.buildRoute())} )
     }
 
     @Composable

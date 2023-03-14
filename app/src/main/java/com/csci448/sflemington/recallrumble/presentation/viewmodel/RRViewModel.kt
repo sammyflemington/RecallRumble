@@ -9,7 +9,7 @@ import com.csci448.sflemington.recallrumble.data.*
 import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 
-class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel{
+class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel {
     companion object {
         private const val LOG_TAG = "448.RRViewModel"
     }
@@ -29,18 +29,22 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val categoryList: List<Category>
         get() = mCategoryList
 
-    private val mCurrentQuestionIndex : MutableState<Int> = mutableStateOf(0)
+    private val mCurrentQuestionIndex: MutableState<Int> = mutableStateOf(0)
 
-    override val currentQuestionNumber : Int
+    override val currentQuestionNumber: Int
         get() = mCurrentQuestionIndex.value + 1
 
-    private val mCurrentQuestion : MutableState<Question?> = mutableStateOf(null)
+    private val mCurrentQuestion: MutableState<Question?> = mutableStateOf(null)
 
-    override val currentQuestionState : Question?
+    override val currentQuestionState: Question?
         get() = mCurrentQuestion.value
 
+//    private val mQuestionStatus : MutableState<QuestionStatus> = mutableStateOf(QuestionStatus.UNANSWERED)
+//    override val currentQuestionStatus : QuestionStatus
+//        get() = mQuestionStatus.value
+
     //Add to IViewModel?
-    private val mCurrentGame : MutableState<QuizPlay?> = mutableStateOf(null)
+    private val mCurrentGame: MutableState<QuizPlay?> = mutableStateOf(null)
 
     override val currentGame: QuizPlay?
         get() = mCurrentGame.value
@@ -48,17 +52,58 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     private val mName = mutableStateOf(user.name)
     private val mUserName = mutableStateOf(user.username)
 
-    override fun onUserProfileSaved(name : String, username : String){
+    // viewing other user profiles
+    private val mCurrentViewedUser: MutableState<User?> = mutableStateOf(null)
+    override val currentViewedUser: User?
+        get() = mCurrentViewedUser.value
+
+    override fun setViewedUser(user: User) {
+        mCurrentViewedUser.value = user
+    }
+
+    override fun onUserProfileSaved(name: String, username: String) {
         Log.d(LOG_TAG, "onUserProfileSaved called")
         mName.value = name
         mUserName.value = username
-        mUser.value = User(name = mName.value, username = mUserName.value, user.friends, user.rank, user.gamesWon, user.gamesLost)
+        mUser.value = User(
+            name = mName.value,
+            username = mUserName.value,
+            user.friends,
+            user.rank,
+            user.gamesWon,
+            user.gamesLost
+        )
     }
+
     override fun newQuizPlay(quizPlay: QuizPlay) {
+
         mCurrentGame.value = quizPlay
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
         //mCurrentQuizQuestionCount.value = quizPlay.quiz.quizQuestionCount
+
     }
-
 }
+//    override fun updateStatus(correct: Boolean) {
+//        if(correct)  {
+//            mQuestionStatus.value =  QuestionStatus.ANSWERED_CORRECT
+//        }
+//        if(!correct)  {
+//            mQuestionStatus.value =  QuestionStatus.ANSWERED_INCORRECT
+//        }
+//    }
 
+
+
+//    override val currentQuizQuestionCount: Int
+//        get() = mCurrentQuizQuestionCount.value
+// private val mCurrentQuizQuestionCount: MutableState<Int> = mutableStateOf(10)
+
+    //There is probably a more efficient way to track players scores
+//    private val mPlayer1Score: MutableState<Int> = mutableStateOf(0)
+//    private val mPlayer2Score: MutableState<Int> = mutableStateOf(0)
+//
+//    val player1Score : Int
+//        get() = mPlayer1Score.value
+//
+//    val player2Score : Int
+//        get() = mPlayer2Score.value

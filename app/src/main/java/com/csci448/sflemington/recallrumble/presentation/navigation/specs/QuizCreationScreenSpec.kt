@@ -9,6 +9,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.presentation.screens.QuizCreationScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
 object QuizCreationScreenSpec : IScreenSpec {
@@ -24,7 +25,7 @@ object QuizCreationScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-
+        QuizCreationScreen()
     }
 
     @Composable
