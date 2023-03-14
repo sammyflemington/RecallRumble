@@ -16,6 +16,6 @@ fun QuizCreationQuestion(question: Question){
 @Preview
 @Composable
 fun PreviewQuizCreationQuestion(){
-    val q = Question(prompt = "Here is a question", answerChoices = listOf("Answer 1", "Answer 2", "Answer 3"), correctAnswerIndex = 1)
-    QuizCreationQuestion(q)
+//    val q = Question(prompt = "Here is a question", answerChoices = listOf("Answer 1", "Answer 2", "Answer 3"), correctAnswerIndex = 1)
+//    QuizCreationQuestion(q)
 }

@@ -1,6 +1,7 @@
 package com.csci448.sflemington.recallrumble.presentation.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -17,21 +18,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.csci448.sflemington.recallrumble.data.Category
-import com.csci448.sflemington.recallrumble.data.CategoryRepository
+import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.data.*
+import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
+import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CategoryListScreen(categories: List<Category>) {
+//RRViewModel?
+fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, view: IViewModel) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.width(300.dp)
         ) {
             items(categories) {
-                Card(
-                    modifier = Modifier
+                Card(modifier = Modifier
                         .padding(11.dp)
                         .height(122.dp)
+                    .clickable {
+                        //val questions = listOf<Question>(Question(answerChoices = listOf("Apple", "Banana")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
+                        val quiz = Quiz("myQuiz", it.questionList, it)
+                        val quizPlay = QuizPlay(quiz, view.user, view.leaderBoard[0])
+                        view.newQuizPlay(quizPlay)
+                        selectCategory()
+                    }
                 ) {
                     Column(Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally)
@@ -53,5 +63,5 @@ fun CategoryListScreen(categories: List<Category>) {
 @Composable
 fun PreviewCategoryListScreen() {
     val previewList = CategoryRepository.categoryList
-    CategoryListScreen(categories = previewList)
+    //CategoryListScreen(categories = previewList)
 }

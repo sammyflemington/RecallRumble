@@ -5,10 +5,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
-import com.csci448.sflemington.recallrumble.data.Category
-import com.csci448.sflemington.recallrumble.data.CategoryRepository
-import com.csci448.sflemington.recallrumble.data.Question
-import com.csci448.sflemington.recallrumble.data.QuizPlay
+import com.csci448.sflemington.recallrumble.data.*
 import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 
@@ -34,18 +31,22 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     private val mCurrentQuestionIndex : MutableState<Int> = mutableStateOf(0)
 
-    val currentQuestionNumber : Int
+    override val currentQuestionNumber : Int
         get() = mCurrentQuestionIndex.value + 1
 
     private val mCurrentQuestion : MutableState<Question?> = mutableStateOf(null)
 
-    val currentQuestionState : Question?
+    override val currentQuestionState : Question?
         get() = mCurrentQuestion.value
+
+//    private val mQuestionStatus : MutableState<QuestionStatus> = mutableStateOf(QuestionStatus.UNANSWERED)
+//    override val currentQuestionStatus : QuestionStatus
+//        get() = mQuestionStatus.value
 
     //Add to IViewModel?
     private val mCurrentGame : MutableState<QuizPlay?> = mutableStateOf(null)
 
-    val currentGame: QuizPlay?
+    override val currentGame: QuizPlay?
         get() = mCurrentGame.value
 
     private val mName = mutableStateOf(user.name)
@@ -57,11 +58,20 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         mUserName.value = username
         mUser.value = User(name = mName.value, username = mUserName.value, user.friends, user.rank, user.gamesWon, user.gamesLost)
     }
-    fun newQuizPlay(quizPlay: QuizPlay) {
+    override fun newQuizPlay(quizPlay: QuizPlay) {
         mCurrentGame.value = quizPlay
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
         //mCurrentQuizQuestionCount.value = quizPlay.quiz.quizQuestionCount
     }
+
+//    override fun updateStatus(correct: Boolean) {
+//        if(correct)  {
+//            mQuestionStatus.value =  QuestionStatus.ANSWERED_CORRECT
+//        }
+//        if(!correct)  {
+//            mQuestionStatus.value =  QuestionStatus.ANSWERED_INCORRECT
+//        }
+//    }
 }
 
 
