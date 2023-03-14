@@ -9,5 +9,6 @@ data class User(
     val rank: Int?,
     val gamesWon: Int,
     val gamesLost: Int,
+    val profilePictureId : Int = 0,
     val id : UUID = UUID.randomUUID()
 )
