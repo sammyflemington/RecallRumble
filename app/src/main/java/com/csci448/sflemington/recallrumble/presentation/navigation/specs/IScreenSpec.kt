@@ -27,7 +27,7 @@ sealed interface IScreenSpec {
             Log.d(LOG_TAG, "allScreens: mapping route \"${it.objectInstance?.route ?: ""}\" to object \"${it.objectInstance}\"")
             it.objectInstance?.route to it.objectInstance
         }
-        const val root = "samodelkin"
+        const val root = "RecallRumble"
         val startDestination = StartGameScreenSpec.route
 
         @Composable
@@ -44,13 +44,15 @@ sealed interface IScreenSpec {
                 bottomNavItems.forEach{ screen->
                     var selected = false
                     if (navBackStackEntry != null){
-                        if (screen.route == navBackStackEntry.destination.route){
+                        if (screen.buildRoute(viewModel.user.id.toString()) == navBackStackEntry.destination.route){
                             selected = true
                         }
                     }
                     NavigationBarItem(
                         selected = selected,
-                        onClick = {navController.navigate(screen.route)},
+                        onClick = {
+                            navController.navigate(screen.buildRoute(viewModel.user.id.toString()))
+                                  },
                         label = {
 
                         },

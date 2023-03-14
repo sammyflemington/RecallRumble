@@ -3,7 +3,10 @@
 
     <!-- menus -->
     <string name="menu_back_desc">Back</string>
-
+    <string name="edit_profile">Edit Profile</string>
+    <string name="view_friends">View Friends</string>
+    <string name="challenge_friend">Invite to Play</string>
+    <string name="not_yet_implemented">This feature is not yet implemented.</string>
     <!-- categories -->
     <string name="category_geography">Geography</string>
     <string name="category_history">History</string>

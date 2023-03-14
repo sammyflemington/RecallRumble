@@ -51,12 +51,22 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     private val mName = mutableStateOf(user.name)
     private val mUserName = mutableStateOf(user.username)
 
+    // viewing other user profiles
+    private val mCurrentViewedUser : MutableState<User?> = mutableStateOf(null)
+    override val currentViewedUser : User?
+        get() = mCurrentViewedUser.value
+
+    override fun setViewedUser(user: User){
+        mCurrentViewedUser.value = user
+    }
+
     override fun onUserProfileSaved(name : String, username : String){
         Log.d(LOG_TAG, "onUserProfileSaved called")
         mName.value = name
         mUserName.value = username
         mUser.value = User(name = mName.value, username = mUserName.value, user.friends, user.rank, user.gamesWon, user.gamesLost)
     }
+
     fun newQuizPlay(quizPlay: QuizPlay) {
         mCurrentGame.value = quizPlay
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
