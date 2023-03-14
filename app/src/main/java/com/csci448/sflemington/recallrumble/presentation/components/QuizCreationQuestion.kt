@@ -46,14 +46,7 @@ fun QuizCreationQuestion(question: Question, myNumber : Int){
             }
         }
     }
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(text = "Cancel", modifier = Modifier.clickable { notif.value = "Cancelled" } )
-        Text(text = "Save", modifier = Modifier.clickable {notif.value = "Saved"})
-    }
+
 }
 
 @Preview
