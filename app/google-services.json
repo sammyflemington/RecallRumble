@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513922998022",
+    "project_id": "recall-rumble-4f4b0",
+    "storage_bucket": "recall-rumble-4f4b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513922998022:android:2327852ea96b2ac9df0887",
+        "android_client_info": {
+          "package_name": "com.csci448.sflemington.recallrumble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513922998022-fdcug6p3hfpote6nt5n8fn7hk42fk4f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaTwDHorpGqruPzglQ72MjxLWMy2NrEpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513922998022-fdcug6p3hfpote6nt5n8fn7hk42fk4f8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
