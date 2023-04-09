@@ -29,11 +29,7 @@ class MainActivity : ComponentActivity() {
     }
     private lateinit var mRRViewModel: RRViewModel
 
-    private val signInLauncher = registerForActivityResult(
-        FirebaseAuthUIActivityResultContract()
-    ) { res ->
-        this.onSignInResult(res)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(LOG_TAG, "onCreate() called")
