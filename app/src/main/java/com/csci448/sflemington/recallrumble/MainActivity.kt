@@ -13,21 +13,28 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-import com.csci448.sflemington.recallrumble.data.CategoryRepository
 import com.csci448.sflemington.recallrumble.presentation.navigation.RRBottomBar
 import com.csci448.sflemington.recallrumble.presentation.navigation.RRNavHost
 import com.csci448.sflemington.recallrumble.presentation.navigation.RRTopBar
-import com.csci448.sflemington.recallrumble.presentation.screens.CategoryListScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModelFactory
 import com.csci448.sflemington.recallrumble.ui.theme.RecallRumbleTheme
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
+
 
 class MainActivity : ComponentActivity() {
     companion object {
         private const val LOG_TAG = "448.MainActivity"
     }
     private lateinit var mRRViewModel: RRViewModel
+
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { result: FirebaseAuthUIAuthenticationResult? -> }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +51,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val auth = FirebaseAuth.getInstance()
+                    if (auth.currentUser != null) {
+                        // already signed in
+                    } else {
+                        // not signed in
+                        val signInIntent = AuthUI.getInstance().createSignInIntentBuilder().build()
+                        signInLauncher.launch(signInIntent)
+                    }
                     MainActivityContent(viewModel = mRRViewModel)
                 }
             }
