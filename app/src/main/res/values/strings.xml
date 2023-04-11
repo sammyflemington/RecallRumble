@@ -23,42 +23,55 @@
     <!-- Geogrpahy Questions -->
     <string name="geography_q1">Which is not a country in Europe?</string>
     <string name="geo_q1_choice1">Portugal</string>
-    <string name = "geo_q1_choice2">Iceland</string>
-    <string name = "geo_q1_choice3">Morocco</string>
-    <string name = "geo_q1_choice4">Romania</string>
+    <string name="geo_q1_choice2">Iceland</string>
+    <string name="geo_q1_choice3">Morocco</string>
+    <string name="geo_q1_choice4">Romania</string>
 
     <!-- History Questions -->
     <string name="history_q1">How long was Queen Elizabeths reign?</string>
     <string name="hist_q1_choice1">70 years</string>
-    <string name = "hist_q1_choice2">69 years</string>
-    <string name = "hist_q1_choice3">68 years</string>
-    <string name = "hist_q1_choice4">67 years</string>
+    <string name="hist_q1_choice2">69 years</string>
+    <string name="hist_q1_choice3">68 years</string>
+    <string name="hist_q1_choice4">67 years</string>
 
     <!-- Pop Culture Questions -->
     <string name="popculture_q1">What was Netflixs most watched show in 2022?</string>
     <string name="pop_q1_choice1">Wednesday</string>
-    <string name = "pop_q1_choice2">Stranger Things</string>
-    <string name = "pop_q1_choice3">Ozark</string>
-    <string name = "pop_q1_choice4">Cobra Kai</string>
+    <string name="pop_q1_choice2">Stranger Things</string>
+    <string name="pop_q1_choice3">Ozark</string>
+    <string name="pop_q1_choice4">Cobra Kai</string>
 
     <!-- Science Questions -->
     <string name="science_q1">What element has the symbol Ag?</string>
     <string name="sci_q1_choice1">Asparagus</string>
-    <string name = "sci_q1_choice2">Argon</string>
-    <string name = "sci_q1_choice3">Gold</string>
-    <string name = "sci_q1_choice4">Silver</string>
+    <string name="sci_q1_choice2">Argon</string>
+    <string name="sci_q1_choice3">Gold</string>
+    <string name="sci_q1_choice4">Silver</string>
 
     <!-- Sports Questions -->
     <string name="sport_q1">Which state is associated with the slogan "State of Hockey"?</string>
     <string name="sport_q1_choice1">Michigan</string>
-    <string name = "sport_q1_choice2">Massachusetts </string>
-    <string name = "sport_q1_choice3">New York</string>
-    <string name = "sport_q1_choice4">Minnesota</string>
+    <string name="sport_q1_choice2">Massachusetts </string>
+    <string name="sport_q1_choice3">New York</string>
+    <string name="sport_q1_choice4">Minnesota</string>
 
     <!-- Movie Questions -->
     <string name="movie_q1">Which actor does not play Spider-Man?</string>
     <string name="movie_q1_choice1">Tom Holland</string>
-    <string name = "movie_q1_choice2">Tony Stark</string>
-    <string name = "movie_q1_choice3">Andrew Garfield</string>
-    <string name = "movie_q1_choice4">Tobey Maguire</string>
+    <string name="movie_q1_choice2">Tony Stark</string>
+    <string name="movie_q1_choice3">Andrew Garfield</string>
+    <string name="movie_q1_choice4">Tobey Maguire</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="type_password">Password</string>
+    <string name="retype_password">Retype Your Password</string>
+    <string name="not_registered_register_now">Not Registered? Register now !</string>
+    <string name="already_registered_log_in">Already Registered , Log In !</string>
+    <string name="type_your_email">Type your Email</string>
+    <string name="already_registered_sign_in">Already Registered , Sign In !</string>
+    <string name="continue_as_guest">Continue as guest.</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="retype_your_password">Retype Your Password</string>
 </resources>
