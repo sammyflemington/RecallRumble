@@ -21,7 +21,6 @@ class Register : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         binding.goToLogIn.setOnClickListener {
-            //CHANGE FOR PLAY AS GUEST
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
@@ -43,7 +42,7 @@ class Register : AppCompatActivity() {
                             val intent = Intent(this, Register::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_LONG).show()
                         }
                     }
                 } else {
