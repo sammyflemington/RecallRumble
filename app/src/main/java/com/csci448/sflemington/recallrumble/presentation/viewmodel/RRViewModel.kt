@@ -1,20 +1,28 @@
 package com.csci448.sflemington.recallrumble.presentation.viewmodel
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import com.csci448.sflemington.recallrumble.data.*
 import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel {
     companion object {
         private const val LOG_TAG = "448.RRViewModel"
     }
-
     private val mUser = mutableStateOf(user)
+    // for firebase access to save user data
+    private val userDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
     private val mLeaderboard = leaderBoard.toMutableStateList()
 
@@ -59,6 +67,9 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     override fun onUserProfileSaved(name: String, username: String) {
         Log.d(LOG_TAG, "onUserProfileSaved called")
+        val auth : FirebaseAuth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser?.uid
+
         mName.value = name
         mUserName.value = username
         mUser.value = User(
@@ -69,6 +80,18 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
             user.gamesWon,
             user.gamesLost
         )
+
+        if (uid != null){
+            userDatabaseReference.child(uid).setValue(mUser.value).addOnCompleteListener{
+                if (it.isSuccessful){
+                    Log.d(LOG_TAG, "Profile updated successfully!")
+                    //Toast.makeText(this.c, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+                }else{
+                    Log.d(LOG_TAG, "Profile failed to update.")
+                    //Toast.makeText(currentCompositionLocalContext, "Failed to update profile", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     override fun newQuizPlay(quizPlay: QuizPlay) {
