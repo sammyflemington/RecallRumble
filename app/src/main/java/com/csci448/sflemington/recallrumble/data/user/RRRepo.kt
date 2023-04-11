@@ -35,17 +35,17 @@ class RRRepo (context: Context?){
             name = "NoName",
             username = "NoUsername",
             friends = listOf(
-                User(name = "Sammy", username = "KoolCookiez96", friends = emptyList(), rank = 3, gamesWon = 0, gamesLost = 100),
-                User(name = "Iso", username = "PorkChomper33", friends = emptyList(), rank = 2, gamesWon = 66, gamesLost = 4),
-                User(name = "Lexi", username = "PaoneFan123", friends = emptyList(), rank = 1, gamesWon = 100, gamesLost = 0)
+                User(name = "Sammy", username = "KoolCookiez96", friends = emptyList(), rank = 3, gamesWon = 0, gamesLost = 100, uid = "a"),
+                User(name = "Iso", username = "PorkChomper33", friends = emptyList(), rank = 2, gamesWon = 66, gamesLost = 4, uid = "b"),
+                User(name = "Lexi", username = "PaoneFan123", friends = emptyList(), rank = 1, gamesWon = 100, gamesLost = 0, uid = "v")
             ),
             rank = 999,
             gamesWon = 0,
-            gamesLost = 0)
+            gamesLost = 0, uid = "d")
         leaderBoard = listOf(
-            User(name = "Sammy", username = "KoolCookiez96", friends = emptyList(), rank = 3, gamesWon = 0, gamesLost = 100),
-            User(name = "Iso", username = "PorkChomper33", friends = emptyList(), rank = 2, gamesWon = 66, gamesLost = 4),
-            User(name = "Lexi", username = "PaoneFan123", friends = emptyList(), rank = 1, gamesWon = 100, gamesLost = 0)
+            User(name = "Sammy", username = "KoolCookiez96", friends = emptyList(), rank = 3, gamesWon = 0, gamesLost = 100, uid = "e"),
+            User(name = "Iso", username = "PorkChomper33", friends = emptyList(), rank = 2, gamesWon = 66, gamesLost = 4, uid = "f"),
+            User(name = "Lexi", username = "PaoneFan123", friends = emptyList(), rank = 1, gamesWon = 100, gamesLost = 0, uid = "g")
         )
     }
 

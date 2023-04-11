@@ -27,7 +27,7 @@ object EditProfileScreenSpec: IScreenSpec {
     ) {
         CreateAccountScreen(viewModel.user, onUserProfileSaved = {name, username ->
             viewModel.onUserProfileSaved(name, username)
-            navController.navigate(ProfileScreenSpec.buildRoute(viewModel.user.id.toString()))
+            navController.navigate(ProfileScreenSpec.buildRoute(viewModel.user.uid.toString()))
         }) { navController.navigateUp() }
     }
 

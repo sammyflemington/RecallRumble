@@ -23,7 +23,7 @@ fun UserList(userList: List<User>, leaderboardFlag: Boolean, navController : Nav
                     Text(text = "# " + user.rank, fontSize = 28.sp)
                     UserCardShort(user = user, onUserCardClicked = {
                         viewModel.setViewedUser(user)
-                        navController.navigate(ProfileScreenSpec.buildRoute(user.id.toString()))
+                        navController.navigate(ProfileScreenSpec.buildRoute(user.uid.toString()))
                     })
                 }
             }
@@ -33,7 +33,7 @@ fun UserList(userList: List<User>, leaderboardFlag: Boolean, navController : Nav
             items(userList) { user ->
                 UserCardShort(user = user, onUserCardClicked = {
                     viewModel.setViewedUser(user)
-                    navController.navigate(ProfileScreenSpec.buildRoute(user.id.toString()))
+                    navController.navigate(ProfileScreenSpec.buildRoute(user.uid.toString()))
                 })
             }
         }

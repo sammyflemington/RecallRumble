@@ -13,8 +13,7 @@ import com.csci448.sflemington.recallrumble.data.*
 import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel {
     companion object {
@@ -61,6 +60,31 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val currentViewedUser: User?
         get() = mCurrentViewedUser.value
 
+    init {
+        val auth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser?.uid.toString()
+
+        if (uid.isNotEmpty()){
+            getUserData(uid)
+        }
+    }
+    private fun getUserData(uid: String) {
+        userDatabaseReference.child(uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val userData : User? = snapshot.getValue(User::class.java)
+                if (userData != null) {
+                    mUser.value = userData
+                    Log.d(LOG_TAG, "User data successfully retrieved")
+                }else{
+                    Log.d(LOG_TAG,"Failed to retrieve user data!")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+    }
     override fun setViewedUser(user: User) {
         mCurrentViewedUser.value = user
     }
@@ -68,7 +92,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override fun onUserProfileSaved(name: String, username: String) {
         Log.d(LOG_TAG, "onUserProfileSaved called")
         val auth : FirebaseAuth = FirebaseAuth.getInstance()
-        val uid = auth.currentUser?.uid
+        val uid : String? = auth.currentUser?.uid
 
         mName.value = name
         mUserName.value = username
@@ -78,7 +102,8 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
             user.friends,
             user.rank,
             user.gamesWon,
-            user.gamesLost
+            user.gamesLost,
+            uid = uid
         )
 
         if (uid != null){

@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -44,14 +45,14 @@ sealed interface IScreenSpec {
                 bottomNavItems.forEach{ screen->
                     var selected = false
                     if (navBackStackEntry != null){
-                        if (screen.buildRoute(viewModel.user.id.toString()) == navBackStackEntry.destination.route){
+                        if (screen.buildRoute(viewModel.user.uid.toString()) == navBackStackEntry.destination.route){
                             selected = true
                         }
                     }
                     NavigationBarItem(
                         selected = selected,
                         onClick = {
-                            navController.navigate(screen.buildRoute(viewModel.user.id.toString()))
+                            navController.navigate(screen.buildRoute(viewModel.user.uid.toString()))
                             viewModel.setViewedUser(viewModel.user)
                                   },
                         label = {
@@ -60,7 +61,8 @@ sealed interface IScreenSpec {
                         icon = {
                             Icon(
                                 imageVector = screen.icon ?: Icons.Default.Warning,
-                                contentDescription = stringResource(screen.title)
+                                contentDescription = stringResource(screen.title),
+                                tint = Color(0xFF3C0066)
                             )
                         }
                     )
