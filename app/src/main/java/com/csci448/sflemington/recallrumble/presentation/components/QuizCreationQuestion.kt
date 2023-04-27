@@ -23,17 +23,17 @@ import com.csci448.sflemington.recallrumble.data.QuestionRepository
 
 @Composable
 fun QuizCreationQuestion(question: Question, myNumber : Int){
-    val prompt = rememberSaveable{mutableStateOf("Question")}
-    val answers = rememberSaveable{listOf(mutableStateOf("Answer 1"),
-        mutableStateOf("Answer 2"),
-        mutableStateOf("Answer 3"),
-        mutableStateOf("Answer 4"))}
-    val correctAnswerIndex = rememberSaveable {mutableStateOf(0)}
-    val notif = rememberSaveable { mutableStateOf("") }
-    if (notif.value.isNotEmpty()) {
-        Toast.makeText(LocalContext.current, notif.value, Toast.LENGTH_LONG).show()
-        notif.value = ""
-    }
+    val prompt = rememberSaveable{mutableStateOf(question.prompt)}
+    val answers = rememberSaveable{listOf(mutableStateOf(question.answerChoices[0]),
+        mutableStateOf(question.answerChoices[1]),
+        mutableStateOf(question.answerChoices[2]),
+        mutableStateOf(question.answerChoices[3]))}
+    val correctAnswerIndex = rememberSaveable {mutableStateOf(question.correctAnswerIndex)}
+//    val notif = rememberSaveable { mutableStateOf("") }
+//    if (notif.value.isNotEmpty()) {
+//        Toast.makeText(LocalContext.current, notif.value, Toast.LENGTH_LONG).show()
+//        notif.value = ""
+//    }
 
     Row(){
         //Text("#".plus(myNumber.toString()))

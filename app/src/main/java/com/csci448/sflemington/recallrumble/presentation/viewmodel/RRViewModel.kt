@@ -60,6 +60,10 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val currentViewedUser: User?
         get() = mCurrentViewedUser.value
 
+    // creating a quiz
+    private val mCurrentQuizCreating : MutableState<Quiz?> = mutableStateOf(null)
+    override val currentQuizCreating : Quiz?
+        get() = mCurrentQuizCreating.value
     init {
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid.toString()
