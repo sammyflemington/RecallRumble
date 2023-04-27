@@ -15,9 +15,10 @@ interface IViewModel {
 
     val currentViewedUser : User?
 
-    val currentQuizCreating : Quiz
+    val currentQuizCreating : MutableQuiz
     fun onUserProfileSaved (name: String, username: String)
     fun newQuizPlay(quizPlay: QuizPlay)
     fun setViewedUser(user: User)
 
+    fun saveQuiz()
 }

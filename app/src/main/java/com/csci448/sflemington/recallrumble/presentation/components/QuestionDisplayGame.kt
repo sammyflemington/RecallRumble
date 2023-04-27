@@ -24,11 +24,11 @@ fun QuestionDisplayGame(view: IViewModel) {
     val currentContext = LocalContext.current
     Column(modifier = Modifier.fillMaxWidth().background(color= Color.LightGray ).padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = stringResource(id = view.currentQuestionState?.prompt ?: 0), fontSize = 23.sp, textAlign = TextAlign.Center)
+        Text(text =  view.currentQuestionState?.prompt ?: "", fontSize = 23.sp, textAlign = TextAlign.Center)
         view.currentQuestionState?.answerChoices?.forEachIndexed { index, answer ->
                 Row() {
                     AnswerButton(
-                        buttonText = stringResource(id = answer),
+                        buttonText =  answer,
                         onButtonClick = {
                             if (index == view.currentQuestionState!!.correctAnswerIndex) {
                                 Toast.makeText(currentContext, "CORRECT! Here you will battle head to head with opponents!", Toast.LENGTH_LONG)

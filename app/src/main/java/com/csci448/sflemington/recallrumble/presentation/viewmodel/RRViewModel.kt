@@ -23,6 +23,8 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     // for firebase access to save user data
     private val userDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
+    private val quizDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Quizzes")
+
     private val mLeaderboard = leaderBoard.toMutableStateList()
 
     private val mCategoryList = CategoryRepository.categoryList
@@ -61,9 +63,11 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         get() = mCurrentViewedUser.value
 
     // creating a quiz
-    private val mCurrentQuizCreating : MutableState<Quiz> = mutableStateOf(QuizRepository.newQuiz)
-    override val currentQuizCreating : Quiz
+    private val mCurrentQuizCreating : MutableState<MutableQuiz> = mutableStateOf(QuizRepository.newQuiz)
+    override val currentQuizCreating : MutableQuiz
         get() = mCurrentQuizCreating.value
+
+
     init {
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid.toString()
@@ -93,6 +97,24 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         mCurrentViewedUser.value = user
     }
 
+    override fun saveQuiz(){
+        Log.d(LOG_TAG, "Saving quiz id " + mCurrentQuizCreating.value.id.toString())
+        val auth : FirebaseAuth = FirebaseAuth.getInstance()
+        val id : String? = mCurrentQuizCreating.value.id.toString()
+        if (id != null){
+            val quizToSave : Quiz
+            quizDatabaseReference.child(mCurrentQuizCreating.value.category.value.category.toString() + "/" + id).setValue(mCurrentQuizCreating.value.toQuiz()).addOnCompleteListener{
+                if (it.isSuccessful){
+                    Log.d(LOG_TAG, "Quiz uploaded successfully!")
+                    //Toast.makeText(this.c, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+                }else{
+                    Log.d(LOG_TAG, "Quiz failed to upload.")
+                    //Toast.makeText(currentCompositionLocalContext, "Failed to update profile", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    }
     override fun onUserProfileSaved(name: String, username: String) {
         Log.d(LOG_TAG, "onUserProfileSaved called")
         val auth : FirebaseAuth = FirebaseAuth.getInstance()

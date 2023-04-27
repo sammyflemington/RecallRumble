@@ -1,5 +1,7 @@
 package com.csci448.sflemington.recallrumble.data
 
+import androidx.compose.runtime.mutableStateOf
+
 object QuizRepository {
     val quiz1 = Quiz(
         title = "My Quiz",
@@ -9,15 +11,15 @@ object QuizRepository {
         category = CategoryRepository.categoryList[5]
     )
 
-    val newQuiz = Quiz(
-        title = "New Quiz",
+    val newQuiz = MutableQuiz(
+        title = mutableStateOf("New Quiz"),
         questionList = listOf(
-            Question(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
-            Question(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
-            Question(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
-            Question(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
-            Question(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0)
+            MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+            MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+            MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+            MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+            MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0)
         ),
-        category = CategoryRepository.categoryList[5]
+        category = mutableStateOf(CategoryRepository.categoryList[5])
     )
 }

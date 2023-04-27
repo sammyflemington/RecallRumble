@@ -15,11 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.csci448.sflemington.recallrumble.data.MutableQuestion
+import com.csci448.sflemington.recallrumble.data.MutableQuiz
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuizCreationPrompt(text: String, questionIndex: Int, onEditButtonClicked : () -> Unit) {
-    var prompt by rememberSaveable { mutableStateOf(text) }
+fun QuizCreationPrompt(question : MutableQuestion, questionIndex: Int, onEditButtonClicked : () -> Unit) {
+
     Card(){
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
 //            IconButton(onClick = onEditButtonClicked ){
@@ -27,7 +29,7 @@ fun QuizCreationPrompt(text: String, questionIndex: Int, onEditButtonClicked : (
 //            }
             Column() {
                 Text(text = "Question " + (questionIndex + 1), fontSize = 20.sp)
-                TextField(value = prompt, onValueChange = {prompt = it})
+                TextField(value = question.mPrompt.value, onValueChange = {question.mPrompt.value = it})
             }
         }
     }
@@ -36,6 +38,6 @@ fun QuizCreationPrompt(text: String, questionIndex: Int, onEditButtonClicked : (
 @Preview
 @Composable
 fun PreviewQuizCreationPrompt(){
-    val text = "Here is the text."
-    QuizCreationPrompt(text, 0){}
+    val question = MutableQuestion("Here is the text.", mutableListOf("","","",""), 0)
+    QuizCreationPrompt(question, 0){}
 }

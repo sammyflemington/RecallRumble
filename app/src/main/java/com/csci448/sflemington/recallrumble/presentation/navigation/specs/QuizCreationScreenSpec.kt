@@ -35,7 +35,7 @@ object QuizCreationScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        QuizCreationScreen(quiz = viewModel.currentQuizCreating, onQuizSaved = )
+        QuizCreationScreen(quiz = viewModel.currentQuizCreating, onQuizSaved = {viewModel.saveQuiz()})
     }
 
     @Composable
@@ -50,8 +50,10 @@ object QuizCreationScreenSpec : IScreenSpec {
                 "Quiz creation will be cancelled",
                 Toast.LENGTH_SHORT
             ).show() } )
-            Text(text = "Save", modifier = Modifier.clickable {Toast.makeText(context,
-                "Quiz will be saved",
+            Text(text = "Save", modifier = Modifier.clickable {
+                viewModel.saveQuiz()
+                Toast.makeText(context,
+                "Quiz saved",
                 Toast.LENGTH_SHORT
             ).show()})
         }

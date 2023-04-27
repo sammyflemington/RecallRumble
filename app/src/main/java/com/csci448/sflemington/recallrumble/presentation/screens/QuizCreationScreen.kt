@@ -10,17 +10,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.csci448.sflemington.recallrumble.data.MutableQuiz
 import com.csci448.sflemington.recallrumble.data.Question
 import com.csci448.sflemington.recallrumble.data.Quiz
 import com.csci448.sflemington.recallrumble.presentation.components.QuizCreationQuestion
 
 @Composable
-fun QuizCreationScreen(quiz : Quiz, onQuizSaved: (Quiz)->Unit){
+fun QuizCreationScreen(quiz : MutableQuiz, onQuizSaved: ()->Unit){
 
-    val myQuiz = remember{mutableStateOf(quiz)}
+    //val myQuiz = remember{mutableStateOf(quiz)}
     LazyColumn{
 
-        itemsIndexed(myQuiz.value.questionList) {i, question->
+        itemsIndexed(quiz.questionList) {i, question->
             QuizCreationQuestion(question, i)
             Spacer(Modifier.height(10.dp))
         }
