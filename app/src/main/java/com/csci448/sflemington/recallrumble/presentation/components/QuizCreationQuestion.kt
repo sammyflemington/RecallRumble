@@ -52,5 +52,5 @@ fun QuizCreationQuestion(question: Question, myNumber : Int){
 @Preview
 @Composable
 fun PreviewQuizCreationQuestion(){
-    QuizCreationQuestion(QuestionRepository.geographyList[0], 1)
+    //QuizCreationQuestion(QuestionRepository.geographyList[0], 1)
 }

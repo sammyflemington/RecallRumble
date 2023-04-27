@@ -35,7 +35,7 @@ object QuizCreationScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        QuizCreationScreen()
+        QuizCreationScreen(quiz = viewModel.currentQuizCreating, onQuizSaved = )
     }
 
     @Composable
