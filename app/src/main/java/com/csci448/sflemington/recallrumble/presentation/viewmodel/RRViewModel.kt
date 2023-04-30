@@ -103,7 +103,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         val id : String? = mCurrentQuizCreating.value.id.toString()
         if (id != null){
             val quizToSave : Quiz
-            quizDatabaseReference.child(mCurrentQuizCreating.value.category.value.category.toString() + "/" + id).setValue(mCurrentQuizCreating.value.toQuiz()).addOnCompleteListener{
+            quizDatabaseReference.child(id).setValue(mCurrentQuizCreating.value.toQuiz()).addOnCompleteListener{
                 if (it.isSuccessful){
                     Log.d(LOG_TAG, "Quiz uploaded successfully!")
                     //Toast.makeText(this.c, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
