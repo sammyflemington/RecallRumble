@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.csci448.sflemington.recallrumble.data.CategoryRepository
 import com.csci448.sflemington.recallrumble.data.MutableQuiz
 import com.csci448.sflemington.recallrumble.presentation.components.QuizCreationQuestion
@@ -21,9 +22,9 @@ fun QuizCreationScreen(quiz : MutableQuiz, onQuizSaved: ()->Unit){
     //val myQuiz = remember{mutableStateOf(quiz)}
     LazyColumn{
         item {
-            Text(text = "Title")
-            TextField(value = quiz.title.value, onValueChange = {quiz.title.value = it})
-            Text(text = "Category")
+            Text(text = "Title", fontSize = 20.sp)
+            TextField( modifier = Modifier.fillMaxWidth(), value = quiz.title.value, onValueChange = {quiz.title.value = it})
+            Text(text = "Category", fontSize = 20.sp)
             CategoriesDropdown(quiz = quiz)
         }
         itemsIndexed(quiz.questionList) {i, question->
@@ -62,11 +63,13 @@ fun CategoriesDropdown(quiz: MutableQuiz) {
 
             ExposedDropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.fillMaxWidth()
             ) {
                 categories.forEach { category ->
                     DropdownMenuItem(
                         text = { Text(text = stringResource(id = category.category))},
+                        modifier = Modifier.fillMaxWidth(),
                         onClick = {
                             selectedCategory = category
                             expanded = false

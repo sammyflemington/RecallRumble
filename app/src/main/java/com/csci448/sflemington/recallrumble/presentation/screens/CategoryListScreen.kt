@@ -40,9 +40,9 @@ fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, v
                     .height(122.dp)
                     .clickable {
                         //val questions = listOf<Question>(Question(answerChoices = listOf("Apple", "Banana")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
-                        val quiz = Quiz("myQuiz", it.questionList, it)
-                        val quizPlay = QuizPlay(quiz, view.user, view.leaderBoard[0])
-                        view.newQuizPlay(quizPlay)
+//                        val quiz = Quiz("myQuiz", it.questionList, it)
+//                        val quizPlay = QuizPlay(quiz, view.user, view.leaderBoard[0])
+//                        view.newQuizPlay(quizPlay)
                         selectCategory()
                     }
                 ) {

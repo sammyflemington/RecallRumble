@@ -38,7 +38,8 @@ object QuizCreationLandingPageSpec : IScreenSpec {
     ) {
         val context = LocalContext.current
         QuizCreationLandingPage(onCreateQuizClicked ={
-             navController.navigate(QuizCreationScreenSpec.buildRoute())
+            navController.navigate(QuizCreationScreenSpec.buildRoute())
+            viewModel.createNewQuiz()
         }, onViewQuizzesClicked = {
             Toast.makeText(context, "You will be directed to a list of your quizzes", Toast.LENGTH_SHORT).show()
         })

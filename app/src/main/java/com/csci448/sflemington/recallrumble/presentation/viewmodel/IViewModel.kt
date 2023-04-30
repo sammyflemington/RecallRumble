@@ -19,6 +19,6 @@ interface IViewModel {
     fun onUserProfileSaved (name: String, username: String)
     fun newQuizPlay(quizPlay: QuizPlay)
     fun setViewedUser(user: User)
-
     fun saveQuiz()
+    fun createNewQuiz()
 }

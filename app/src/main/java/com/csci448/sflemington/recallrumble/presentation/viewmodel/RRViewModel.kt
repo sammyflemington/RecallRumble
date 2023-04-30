@@ -67,7 +67,6 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val currentQuizCreating : MutableQuiz
         get() = mCurrentQuizCreating.value
 
-
     init {
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid.toString()
@@ -76,6 +75,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
             getUserData(uid)
         }
     }
+
     private fun getUserData(uid: String) {
         userDatabaseReference.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -151,5 +151,10 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
         //mCurrentQuizQuestionCount.value = quizPlay.quiz.quizQuestionCount
 
+    }
+
+    override fun createNewQuiz() {
+        mCurrentQuizCreating.value = QuizRepository.newQuiz
+        mCurrentQuizCreating.value.creatorID.value = user.uid.toString()
     }
 }
