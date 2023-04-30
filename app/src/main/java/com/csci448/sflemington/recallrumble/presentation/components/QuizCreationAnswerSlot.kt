@@ -9,11 +9,8 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,8 +21,7 @@ import com.csci448.sflemington.recallrumble.data.Quiz
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuizCreationAnswerSlot(text: String, answerIndex: Int, correctAnswerIndex : Int, onCorrectAnswerClicked : () -> Unit){
-    var option by rememberSaveable { mutableStateOf(text) }
+fun QuizCreationAnswerSlot(text: MutableState<String>, answerIndex: Int, correctAnswerIndex : Int, onCorrectAnswerClicked : () -> Unit){
     Card(colors = CardDefaults.cardColors(
         containerColor = if (answerIndex == correctAnswerIndex)
             MaterialTheme.colorScheme.surfaceTint
@@ -43,7 +39,7 @@ fun QuizCreationAnswerSlot(text: String, answerIndex: Int, correctAnswerIndex : 
             }
             Column() {
                 Text(text = "Option " + (answerIndex + 1), fontSize = 16.sp)
-                TextField(value = option, onValueChange = {option = it})
+                TextField(value = text.value, onValueChange = {text.value = it})
             }
         }
     }
@@ -53,5 +49,5 @@ fun QuizCreationAnswerSlot(text: String, answerIndex: Int, correctAnswerIndex : 
 @Composable
 fun PreviewQuizCreationAnswerSlot(){
     val text = "Here is the text."
-    QuizCreationAnswerSlot(text, 0, 0){}
+    //QuizCreationAnswerSlot(text, 0, 0){}
 }
