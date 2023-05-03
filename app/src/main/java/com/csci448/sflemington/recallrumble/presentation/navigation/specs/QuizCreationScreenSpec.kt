@@ -46,16 +46,15 @@ object QuizCreationScreenSpec : IScreenSpec {
             .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Cancel", modifier = Modifier.clickable { Toast.makeText(context,
-                "Quiz creation will be cancelled",
-                Toast.LENGTH_SHORT
-            ).show() } )
+            Text(text = "Cancel", modifier = Modifier.clickable {
+                Toast.makeText(context, "Quiz creation cancelled", Toast.LENGTH_SHORT).show()
+                navController.popBackStack()
+            } )
             Text(text = "Save", modifier = Modifier.clickable {
                 viewModel.saveQuiz()
-                Toast.makeText(context,
-                "Quiz saved",
-                Toast.LENGTH_SHORT
-            ).show()})
+                Toast.makeText(context,"Quiz saved", Toast.LENGTH_SHORT).show()
+                navController.navigate(QuizCreationLandingPageSpec.buildRoute())
+            })
         }
     }
 }

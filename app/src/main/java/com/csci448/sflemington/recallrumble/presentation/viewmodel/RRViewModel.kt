@@ -154,7 +154,18 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     }
 
     override fun createNewQuiz() {
-        mCurrentQuizCreating.value = QuizRepository.newQuiz
+        mCurrentQuizCreating.value = MutableQuiz(
+            title = mutableStateOf("New Quiz"),
+            questionList = listOf(
+                MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+                MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+                MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+                MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0),
+                MutableQuestion(prompt = "", answerChoices = listOf("","","",""), correctAnswerIndex = 0)
+            ),
+            category = mutableStateOf(CategoryRepository.categoryList[5]),
+            creatorID = mutableStateOf("")
+        )
         mCurrentQuizCreating.value.creatorID.value = user.uid.toString()
     }
 }
