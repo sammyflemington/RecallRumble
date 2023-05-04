@@ -54,6 +54,7 @@ sealed interface IScreenSpec {
                         onClick = {
                             navController.navigate(screen.buildRoute(viewModel.user.uid.toString()))
                             viewModel.setViewedUser(viewModel.user)
+                            viewModel.updateLeaderboard()
                                   },
                         label = {
                             screen.title

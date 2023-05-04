@@ -21,4 +21,5 @@ interface IViewModel {
     fun setViewedUser(user: User)
     fun saveQuiz()
     fun createNewQuiz()
+    fun updateLeaderboard()
 }

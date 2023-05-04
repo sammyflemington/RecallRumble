@@ -3,10 +3,8 @@ package com.csci448.sflemington.recallrumble.presentation.viewmodel
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.currentCompositionLocalContext
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.toMutableStateList
+import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import com.csci448.sflemington.recallrumble.data.*
@@ -25,7 +23,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     private val quizDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Quizzes")
 
-    private val mLeaderboard = leaderBoard.toMutableStateList()
+    private var mLeaderboard = leaderBoard.toMutableStateList()
 
     private val mCategoryList = CategoryRepository.categoryList
 
@@ -167,5 +165,19 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
             creatorID = mutableStateOf("")
         )
         mCurrentQuizCreating.value.creatorID.value = user.uid.toString()
+    }
+
+    override fun updateLeaderboard() {
+        userDatabaseReference.get().addOnSuccessListener { userList -> // List<Question>
+            val map = userList.getValue() as Map<*, *>
+            Log.e(LOG_TAG, "Values: "+ map.get("MdKM1UHBleTH4xtwAr0i4O9Hiry1")!!::class)
+            //mLeaderboard = map.values.toList().toMutableStateList() as SnapshotStateList<User>
+
+//            val map = userList.getValue() as Map<*, *>
+//            Log.e(LOG_TAG, "Values: "+ map.get("MdKM1UHBleTH4xtwAr0i4O9Hiry1")!!::class)
+//            //mLeaderboard = map.values.toList().toMutableStateList() as SnapshotStateList<User>
+        }.addOnFailureListener {
+            Log.e(LOG_TAG, "Error", it)
+        }
     }
 }
