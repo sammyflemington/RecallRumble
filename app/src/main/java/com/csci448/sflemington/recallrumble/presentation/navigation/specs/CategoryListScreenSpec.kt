@@ -25,7 +25,11 @@ object CategoryListScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        CategoryListScreen(viewModel.categoryList, { navController.navigate("gameScreen")}, view = viewModel)
+        CategoryListScreen(viewModel.categoryList, {
+            viewModel.fetchQuizFromCategory(it)
+            navController.navigate("gameScreen")
+
+                                                   }, view = viewModel)
     }
 
     @Composable

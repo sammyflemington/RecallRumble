@@ -72,40 +72,40 @@ fun GameScreen(view: IViewModel) {
                     .width(180.dp)
                     .padding(5.dp)
             ) {
-                Row() {
-                    Image(
-                        painter = painterResource(id = com.csci448.sflemington.recallrumble.R.drawable.user),
-                        contentDescription = null,
-                        modifier = Modifier.size(60.dp)
-                    )
-                    Column() {
-                        Text(
-                            text = view.currentGame?.player2?.username ?: "null",
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        Row() {
-                            Text(
-                                text = "Score: ",
-                                fontSize = 16.sp,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                            Text(
-                                text = view.currentGame?.player1Score.toString(),
-                                fontSize = 16.sp,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                }
+//                Row() {
+//                    Image(
+//                        painter = painterResource(id = com.csci448.sflemington.recallrumble.R.drawable.user),
+//                        contentDescription = null,
+//                        modifier = Modifier.size(60.dp)
+//                    )
+//                    Column() {
+//                        Text(
+//                            text = view.currentGame?.player2?.username ?: "null",
+//                            fontSize = 16.sp,
+//                            color = MaterialTheme.colorScheme.primary
+//                        )
+//                        Row() {
+//                            Text(
+//                                text = "Score: ",
+//                                fontSize = 16.sp,
+//                                color = MaterialTheme.colorScheme.primary
+//                            )
+//                            Text(
+//                                text = view.currentGame?.player1Score.toString(),
+//                                fontSize = 16.sp,
+//                                color = MaterialTheme.colorScheme.primary
+//                            )
+//                        }
+//                    }
+//                }
             }
         }
         Row() {
             Text(text = "VS", fontSize = 26.sp, color = Color.Red)
         }
-            Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0), fontSize = 33.sp)
+            //Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0), fontSize = 33.sp)
             Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}", fontSize = 23.sp)
-            QuestionDisplayGame(view)
+            QuestionDisplayGame(view, onCorrectAnswer = {view.onCorrectAnswer()}, onWrongAnswer = {view.onWrongAnswer()})
     }
 }
 

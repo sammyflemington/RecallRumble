@@ -22,4 +22,8 @@ interface IViewModel {
     fun saveQuiz()
     fun createNewQuiz()
     fun updateLeaderboard()
+
+    fun onCorrectAnswer()
+    fun onWrongAnswer()
+    fun fetchQuizFromCategory(category: Int)
 }

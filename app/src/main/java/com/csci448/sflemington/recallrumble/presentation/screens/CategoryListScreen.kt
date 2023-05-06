@@ -26,7 +26,7 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 //RRViewModel?
-fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, view: IViewModel) {
+fun CategoryListScreen(categories: List<Category>, selectCategory: (Int) -> Unit, view: IViewModel) {
     Column(modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally)
     {
@@ -43,7 +43,7 @@ fun CategoryListScreen(categories: List<Category>, selectCategory: () -> Unit, v
 //                        val quiz = Quiz("myQuiz", it.questionList, it)
 //                        val quizPlay = QuizPlay(quiz, view.user, view.leaderBoard[0])
 //                        view.newQuizPlay(quizPlay)
-                        selectCategory()
+                        selectCategory(it.category)
                     }
                 ) {
                     Column(

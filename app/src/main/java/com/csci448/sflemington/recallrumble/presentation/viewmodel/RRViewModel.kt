@@ -12,6 +12,7 @@ import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlin.random.Random
 
 class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel {
     companion object {
@@ -151,6 +152,56 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     }
 
+    override fun fetchQuizFromCategory(category: Int) {
+        Log.d(LOG_TAG, "Loading quiz from category " + category.toString())
+        quizDatabaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val t = object: GenericTypeIndicator<HashMap<String, Quiz>?> (){}
+                Log.d(LOG_TAG, "RAW DATA: " + snapshot.value)
+                val allQuizzes : HashMap<String, Quiz>? = snapshot.getValue(t)
+                Log.d(LOG_TAG, "Quizzes fetched : " + allQuizzes)
+                if (allQuizzes != null) {
+                    val quizzesInCategory : MutableList<Quiz> = mutableListOf()
+                    for (quiz : Quiz in allQuizzes.values!!){
+                        if (quiz.category.category == category){
+                            quizzesInCategory.add(quiz)
+                        }
+                    }
+                    val quiz : Quiz = quizzesInCategory[Random.nextInt(0, quizzesInCategory.size)]
+                    mCurrentGame.value = QuizPlay(quiz, user, 0)
+                    mCurrentQuestion.value = mCurrentGame.value?.quiz!!.questionList[mCurrentQuestionIndex.value]
+                }else{
+                    Log.d(LOG_TAG,"Failed to retrieve quiz data!")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+//        Log.d(LOG_TAG, "Loading quiz from category " + category.toString())
+//        val auth : FirebaseAuth = FirebaseAuth.getInstance()
+//        quizDatabaseReference.get().addOnCompleteListener{
+//            if (it.isSuccessful){
+//                val allQuizzes = it.result as HashMap<String, HashMap<String, Quiz>>
+//                Log.d(LOG_TAG, "Quizzes fetched : " + allQuizzes)
+//                // choose a random quiz from the category
+////                val quizzesInCategory : MutableList<Quiz> = mutableListOf()
+////                for (quiz : Quiz in allQuizzes.values){
+////                    if (quiz.category.category == category){
+////                        quizzesInCategory.add(quiz)
+////                    }
+////                }
+////                val quiz : Quiz = quizzesInCategory[Random.nextInt(0, quizzesInCategory.size)]
+////                mCurrentGame.value = QuizPlay(quiz, user, 0)
+//                //Toast.makeText(this.c, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+//            }else{
+//                Log.d(LOG_TAG, "Failed to fetch quiz.")
+//                //Toast.makeText(currentCompositionLocalContext, "Failed to update profile", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
+    }
     override fun createNewQuiz() {
         mCurrentQuizCreating.value = MutableQuiz(
             title = mutableStateOf("New Quiz"),
@@ -167,17 +218,42 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         mCurrentQuizCreating.value.creatorID.value = user.uid.toString()
     }
 
-    override fun updateLeaderboard() {
-        userDatabaseReference.get().addOnSuccessListener { userList -> // List<Question>
-            val map = userList.getValue() as Map<*, *>
-            Log.e(LOG_TAG, "Values: "+ map.get("MdKM1UHBleTH4xtwAr0i4O9Hiry1")!!::class)
-            //mLeaderboard = map.values.toList().toMutableStateList() as SnapshotStateList<User>
-
-//            val map = userList.getValue() as Map<*, *>
-//            Log.e(LOG_TAG, "Values: "+ map.get("MdKM1UHBleTH4xtwAr0i4O9Hiry1")!!::class)
-//            //mLeaderboard = map.values.toList().toMutableStateList() as SnapshotStateList<User>
-        }.addOnFailureListener {
-            Log.e(LOG_TAG, "Error", it)
+    override fun onCorrectAnswer(){
+        if (mCurrentGame.value != null){
+            mCurrentGame.value!!.player1Score += 1
         }
+       nextQuestion()
+    }
+    override fun onWrongAnswer() {
+        nextQuestion()
+    }
+    fun nextQuestion(){
+        mCurrentQuestionIndex.value += 1
+        if (mCurrentGame.value?.quiz != null){
+            mCurrentQuestion.value = mCurrentGame.value?.quiz!!.questionList[mCurrentQuestionIndex.value]
+        }
+
+    }
+    override fun updateLeaderboard() {
+//        userDatabaseReference.get().addOnSuccessListener { userList -> // List<Question>
+//            val tempList: MutableList<User> = mutableListOf()
+//            val t : GenericTypeIndicator<HashMap<String, Object>> = GenericTypeIndicator()
+//            val map  = userList.getValue(t)
+//            if (map != null){
+//                for (item in map.values){
+//                    tempList.add(item)
+//                }
+//                mLeaderboard = tempList.toMutableStateList()
+//            }
+//
+//            //Log.e(LOG_TAG, "Values: "+ map::class)
+//
+//
+////            val map = userList.getValue() as Map<*, *>
+////            Log.e(LOG_TAG, "Values: "+ map.get("MdKM1UHBleTH4xtwAr0i4O9Hiry1")!!::class)
+////            //mLeaderboard = map.values.toList().toMutableStateList() as SnapshotStateList<User>
+//        }.addOnFailureListener {
+//            Log.e(LOG_TAG, "Error", it)
+//        }
     }
 }
