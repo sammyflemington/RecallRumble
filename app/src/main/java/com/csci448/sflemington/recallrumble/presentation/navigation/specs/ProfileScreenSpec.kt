@@ -43,6 +43,8 @@ object ProfileScreenSpec : IScreenSpec{
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
+        Log.d(LOG_TAG, "CurrentViewUser: " + viewModel.currentViewedUser?.uid)
+        Log.d(LOG_TAG, "User: " + viewModel.user.uid)
         ProfileScreen(viewModel.user, viewedUser = viewModel.currentViewedUser, onEditProfileClicked = { navController.navigate(EditProfileScreenSpec.route) }, onViewFriendsClicked = { navController.navigate(FriendsScreenSpec.route)})
     }
 
