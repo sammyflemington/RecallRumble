@@ -72,10 +72,17 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val currentScore: Int
         get() = mCurrentScore.value
 
-    override val isAnimated: Boolean
+    val isAnimated: Boolean
         get() = mIsAnimated.value
 
     private val mIsAnimated : MutableState<Boolean> = mutableStateOf(false)
+
+    override val currentGameCreator: String
+        get() = mCurrentGameCreator.value
+
+    private val mCurrentGameCreator : MutableState<String> = mutableStateOf("")
+
+
 
     init {
         val auth = FirebaseAuth.getInstance()
@@ -160,6 +167,23 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         mCurrentGame.value = quizPlay
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
         mCurrentScore.value = 0
+
+        quizDatabaseReference.child(mCurrentGame.value!!.quiz.creatorID).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val userData : User? = snapshot.getValue(User::class.java)
+                if (userData != null) {
+                    mCurrentGameCreator.value = userData.username
+                    Log.d(LOG_TAG, "User data successfully retrieved")
+                }else{
+                    Log.d(LOG_TAG,"Failed to retrieve user data!")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+
         //mCurrentQuizQuestionCount.value = quizPlay.quiz.quizQuestionCount
 
     }
@@ -242,11 +266,12 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     }
 
     fun nextQuestion(){
-        mCurrentQuestionIndex.value += 1
-        if (mCurrentGame.value?.quiz != null){
-            mCurrentQuestion.value = mCurrentGame.value?.quiz!!.questionList[mCurrentQuestionIndex.value]
+        if (mCurrentQuestionIndex.value <= 5) {
+            mCurrentQuestionIndex.value += 1
+            if (mCurrentGame.value?.quiz != null){
+                mCurrentQuestion.value = mCurrentGame.value?.quiz!!.questionList[mCurrentQuestionIndex.value]
+            }
         }
-
     }
     override fun updateLeaderboard() {
 //        userDatabaseReference.get().addOnSuccessListener { userList -> // List<Question>

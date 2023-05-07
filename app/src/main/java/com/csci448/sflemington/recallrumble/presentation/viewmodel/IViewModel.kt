@@ -19,7 +19,7 @@ interface IViewModel {
 
     val currentQuizCreating : MutableQuiz
 
-    val isAnimated : Boolean
+    val currentGameCreator: String
 
     fun onUserProfileSaved (name: String, username: String)
     fun newQuizPlay(quizPlay: QuizPlay)

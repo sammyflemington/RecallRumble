@@ -6,12 +6,12 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
-import com.csci448.sflemington.recallrumble.presentation.screens.CategoryListScreen
+import com.csci448.sflemington.recallrumble.presentation.screens.GameResultScreen
 import com.csci448.sflemington.recallrumble.presentation.screens.GameScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
-object GameScreenSpec : IScreenSpec {
-    override val route = "gameScreen"
+object GameResultsScreenSpec : IScreenSpec {
+    override val route = "gameResultsScreen"
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args : String?) = route
     override val title : Int = R.string.app_name
@@ -23,20 +23,7 @@ object GameScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        GameScreen(
-            viewModel,
-            onCorrect = {
-                viewModel.onCorrectAnswer()
-                if (viewModel.currentQuestionNumber == 5) {
-                    navController.navigate(GameResultsScreenSpec.buildRoute())
-                }
-                        } ,
-            onWrong = {
-                viewModel.onWrongAnswer()
-                if (viewModel.currentQuestionNumber == 5) {
-                    navController.navigate(GameResultsScreenSpec.buildRoute())
-                }
-            })
+        GameResultScreen(view = viewModel)
     }
 
     @Composable

@@ -26,7 +26,7 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 
 @Composable
 //Do we want an IViewModel or an RRViewModel?
-fun GameScreen(view: IViewModel) {
+fun GameScreen(view: IViewModel, onCorrect : () -> Unit, onWrong : () -> Unit) {
     val orientation = LocalConfiguration.current.orientation
     val currentContext = LocalContext.current
     Column(
@@ -73,7 +73,8 @@ fun GameScreen(view: IViewModel) {
         }
             //Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0), fontSize = 33.sp)
             Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}", fontSize = 23.sp)
-            QuestionDisplayGame(view, onCorrectAnswer = {view.onCorrectAnswer()}, onWrongAnswer = {view.onWrongAnswer()})
+
+            QuestionDisplayGame(view, onCorrectAnswer = {onCorrect()}, onWrongAnswer = {onWrong()})
     }
 }
 
