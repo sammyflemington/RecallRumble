@@ -36,7 +36,7 @@ fun QuestionDisplayGame(view: IViewModel, onCorrectAnswer : ()->Unit, onWrongAns
         .background(color = Color.LightGray)
         .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        //Text(text =  view.currentQuestionState?.prompt ?: "Quiz not found", fontSize = 23.sp, textAlign = TextAlign.Center)
+        Text(text =  view.currentQuestionState?.prompt ?: "Quiz not found", fontSize = 23.sp, textAlign = TextAlign.Center)
         view.currentQuestionState?.answerChoices?.forEachIndexed { index, answer ->
                 Row() {
                     AnswerButton(
