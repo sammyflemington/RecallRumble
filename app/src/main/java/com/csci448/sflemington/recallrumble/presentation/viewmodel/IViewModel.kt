@@ -13,9 +13,14 @@ interface IViewModel {
     val currentQuestionNumber : Int
     val currentQuestionState : Question?
 
+    val currentScore: Int
+
     val currentViewedUser : User?
 
     val currentQuizCreating : MutableQuiz
+
+    val isAnimated : Boolean
+
     fun onUserProfileSaved (name: String, username: String)
     fun newQuizPlay(quizPlay: QuizPlay)
     fun setViewedUser(user: User)

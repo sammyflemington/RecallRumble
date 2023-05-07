@@ -63,8 +63,19 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
     // creating a quiz
     private val mCurrentQuizCreating : MutableState<MutableQuiz> = mutableStateOf(QuizRepository.newQuiz)
+
     override val currentQuizCreating : MutableQuiz
         get() = mCurrentQuizCreating.value
+
+    private val mCurrentScore : MutableState<Int> = mutableStateOf(0)
+
+    override val currentScore: Int
+        get() = mCurrentScore.value
+
+    override val isAnimated: Boolean
+        get() = mIsAnimated.value
+
+    private val mIsAnimated : MutableState<Boolean> = mutableStateOf(false)
 
     init {
         val auth = FirebaseAuth.getInstance()
@@ -148,6 +159,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
 
         mCurrentGame.value = quizPlay
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
+        mCurrentScore.value = 0
         //mCurrentQuizQuestionCount.value = quizPlay.quiz.quizQuestionCount
 
     }
@@ -222,11 +234,13 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         if (mCurrentGame.value != null){
             mCurrentGame.value!!.player1Score += 1
         }
-       nextQuestion()
+        mCurrentScore.value += 1000
+        nextQuestion()
     }
     override fun onWrongAnswer() {
         nextQuestion()
     }
+
     fun nextQuestion(){
         mCurrentQuestionIndex.value += 1
         if (mCurrentGame.value?.quiz != null){
