@@ -1,5 +1,6 @@
 package com.csci448.sflemington.recallrumble.presentation.screens
 
+import android.media.MediaPlayer
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +23,8 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
 @Composable
 fun GameResultScreen(view: IViewModel) {
+    val mMediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.crowd)
+    mMediaPlayer.start()
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Results", fontSize = 50.sp)
         Text(text = "Quiz: " + view.currentGame?.quiz?.title, fontSize = 20.sp)

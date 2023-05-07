@@ -1,5 +1,6 @@
 package com.csci448.sflemington.recallrumble.presentation.screens
 
+import android.media.MediaPlayer
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.csci448.sflemington.recallrumble.R
 import com.csci448.sflemington.recallrumble.data.*
 import com.csci448.sflemington.recallrumble.data.user.User
 import com.csci448.sflemington.recallrumble.presentation.components.AnswerButton
@@ -29,6 +31,8 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
 fun GameScreen(view: IViewModel, onCorrect : () -> Unit, onWrong : () -> Unit) {
     val orientation = LocalConfiguration.current.orientation
     val currentContext = LocalContext.current
+    val mMediaPlayerDing = MediaPlayer.create(currentContext, R.raw.ding)
+    val mMediaPlayerBoo = MediaPlayer.create(currentContext, R.raw.boo)
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -74,7 +78,16 @@ fun GameScreen(view: IViewModel, onCorrect : () -> Unit, onWrong : () -> Unit) {
             //Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0), fontSize = 33.sp)
             Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}", fontSize = 23.sp)
 
-            QuestionDisplayGame(view, onCorrectAnswer = {onCorrect()}, onWrongAnswer = {onWrong()})
+            QuestionDisplayGame(
+                view,
+                onCorrectAnswer = {
+                    onCorrect()
+                    mMediaPlayerDing.start()
+                                  },
+                onWrongAnswer = {
+                    onWrong()
+                    mMediaPlayerBoo.start()
+                })
     }
 }
 
