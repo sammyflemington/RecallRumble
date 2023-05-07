@@ -41,25 +41,25 @@ fun UserCard(user: User) {
                 .fillMaxWidth()
                 .padding(top = 8.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
                 .background(color = MaterialTheme.colorScheme.primaryContainer)) {
-            Text(text = "Rank: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
-            Text(text = user.rank.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+            Text(text = "Rating: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+            Text(text = (user.bestScoresByCategory.values.sum() / user.bestScoresByCategory.values.size).toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
         }
         Row(
             Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
                 .background(color = MaterialTheme.colorScheme.primaryContainer)) {
-            Text(text = "Games Won: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
-            Text(text = user.gamesWon.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+            Text(text = "Games Played: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+            Text(text = user.gamesPlayed.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
         }
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
-                .background(color = MaterialTheme.colorScheme.primaryContainer)) {
-            Text(text = "Games Lost: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
-            Text(text = user.gamesLost.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
-        }
+//        Row(
+//            Modifier
+//                .fillMaxWidth()
+//                .padding(top = 8.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
+//                .background(color = MaterialTheme.colorScheme.primaryContainer)) {
+//            Text(text = "Games Lost: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+//            Text(text = user.gamesLost.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+//        }
         var bestCategory : Int
         var bestScore : Int = 0
         var bestCategoryIdx : Int = -1

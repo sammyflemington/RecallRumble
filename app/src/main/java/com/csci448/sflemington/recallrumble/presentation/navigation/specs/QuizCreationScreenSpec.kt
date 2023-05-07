@@ -55,7 +55,7 @@ object QuizCreationScreenSpec : IScreenSpec {
             } )
             Text(text = "Save", modifier = Modifier.clickable {
                 if (viewModel.currentQuizCreating.hasEmptySlot()){
-                    Toast.makeText(context, "Quiz has empty field, failed to submit.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Quiz has empty field, please complete all fields before submitting.", Toast.LENGTH_LONG).show()
                 }else{
                     Toast.makeText(context,"Quiz saved", Toast.LENGTH_SHORT).show()
                     viewModel.saveQuiz()

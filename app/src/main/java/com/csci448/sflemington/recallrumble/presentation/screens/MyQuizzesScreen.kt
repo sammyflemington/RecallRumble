@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +26,7 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 @Composable
 fun MyQuizzesScreen(viewModel : IViewModel, myQuizzes: List<Quiz>, onQuizClicked: (Quiz)->Unit, onCreateQuiz: ()->Unit){
 
-    LazyColumn{
+    LazyColumn(modifier = Modifier.padding(8.dp)){
         if (myQuizzes.isEmpty()){
             item{
                 Spacer(modifier = Modifier.height(8.dp))
@@ -52,6 +53,12 @@ fun MyQuizzesListItem(quiz: Quiz, onClick: (Quiz)->Unit){
                 Text(quiz.title, fontSize = 24.sp)
                 Text(stringResource(quiz.category.category), fontSize = 16.sp)
             }
+            Spacer(modifier = Modifier.width(128.dp))
+            Column(verticalArrangement = Arrangement.Center){
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(quiz.plays.toString() + " play"+ if (quiz.plays != 1) "s" else "")
+            }
+
 //            Box(modifier = Modifier.fillMaxHeight().align(Alignment.CenterVertically)){
 //                Text("Edit")
 //            }

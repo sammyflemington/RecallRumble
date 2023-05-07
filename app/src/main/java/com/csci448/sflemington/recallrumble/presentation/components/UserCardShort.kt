@@ -43,6 +43,14 @@ fun UserCardShort(user: User, onUserCardClicked : (User) -> Unit) {
                     Text(text = "Rating: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
                     Text(text = (user.bestScoresByCategory.values.sum() / user.bestScoresByCategory.values.size).toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
                 }
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp)
+                        .background(color = MaterialTheme.colorScheme.primaryContainer)) {
+                    Text(text = "Games Played: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+                    Text(text = (user.gamesPlayed).toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+                }
             }
 
         }

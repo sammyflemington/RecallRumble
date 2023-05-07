@@ -7,8 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 interface IViewModel {
     val user: User
     val leaderBoard: List<User>
+    val userFollowing: List<User>
     val categoryList: List<Category>
 
+    val isViewedUserFollowed: Boolean
     val currentGame: QuizPlay?
     val currentQuestionNumber : Int
     val currentQuestionState : Question?
@@ -34,4 +36,5 @@ interface IViewModel {
     fun loadQuizToEdit(quiz: Quiz)
     fun fetchCurrentUserQuizzes()
     fun updateGameResults()
+    fun followUser(id: String)
 }
