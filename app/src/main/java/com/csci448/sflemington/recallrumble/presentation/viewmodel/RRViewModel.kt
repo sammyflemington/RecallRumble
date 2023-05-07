@@ -88,6 +88,8 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid.toString()
 
+        Log.d(LOG_TAG, "UID: " + uid)
+
         if (uid.isNotEmpty()){
             getUserData(uid)
         }
@@ -97,6 +99,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         userDatabaseReference.child(uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val userData : User? = snapshot.getValue(User::class.java)
+                Log.d(LOG_TAG, "User :" + userData)
                 if (userData != null) {
                     mUser.value = userData
                     Log.d(LOG_TAG, "User data successfully retrieved")
@@ -160,6 +163,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
                 }
             }
         }
+        mCurrentViewedUser.value = null
     }
 
     override fun newQuizPlay(quizPlay: QuizPlay) {
