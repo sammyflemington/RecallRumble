@@ -13,9 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.data.CategoryRepository
 import com.csci448.sflemington.recallrumble.data.user.User
 
 
@@ -58,5 +60,27 @@ fun UserCard(user: User) {
             Text(text = "Games Lost: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
             Text(text = user.gamesLost.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
         }
+        var bestCategory : Int
+        var bestScore : Int = 0
+        var bestCategoryIdx : Int = -1
+        CategoryRepository.categoryList.forEachIndexed { i, cat ->
+            val score = user.bestScoresByCategory[cat.category.toString()]
+            if (score != null) {
+                if (score > bestScore){
+                    bestScore = score
+                    bestCategory = cat.category
+                    bestCategoryIdx = i
+                }
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
+                .background(color = MaterialTheme.colorScheme.primaryContainer)) {
+            Text(text = "Best Category: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+            Text(text = if (bestCategoryIdx != -1) stringResource(CategoryRepository.categoryList[bestCategoryIdx].category) else "None",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+        }
+
     }
 }
