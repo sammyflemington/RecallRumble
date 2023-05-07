@@ -18,7 +18,7 @@ interface IViewModel {
     val currentViewedUser : User?
 
     val currentQuizCreating : MutableQuiz
-
+    val currentUserQuizzes: List<Quiz>
     val currentGameCreator: String
 
     fun onUserProfileSaved (name: String, username: String)
@@ -31,4 +31,6 @@ interface IViewModel {
     fun onCorrectAnswer()
     fun onWrongAnswer()
     fun fetchQuizFromCategory(category: Int)
+    fun loadQuizToEdit(quiz: Quiz)
+    fun fetchCurrentUserQuizzes()
 }

@@ -4,7 +4,8 @@ import com.csci448.sflemington.recallrumble.R
 
 class Question(val prompt : String = "", val answerChoices : List<String> = listOf(), val correctAnswerIndex : Int = 0) {
 
-    fun toMutableQuestion(){
-
+    fun toMutableQuestion() : MutableQuestion{
+        return MutableQuestion(prompt, answerChoices, correctAnswerIndex)
     }
+
 }

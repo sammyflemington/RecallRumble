@@ -41,7 +41,9 @@ object QuizCreationLandingPageSpec : IScreenSpec {
             navController.navigate(QuizCreationScreenSpec.buildRoute())
             viewModel.createNewQuiz()
         }, onViewQuizzesClicked = {
-            Toast.makeText(context, "You will be directed to a list of your quizzes", Toast.LENGTH_SHORT).show()
+            viewModel.fetchCurrentUserQuizzes()
+            navController.navigate(MyQuizzesScreenSpec.route)
+            //Toast.makeText(context, "You will be directed to a list of your quizzes", Toast.LENGTH_SHORT).show()
         })
         }
 

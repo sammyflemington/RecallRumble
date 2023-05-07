@@ -67,6 +67,10 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     override val currentQuizCreating : MutableQuiz
         get() = mCurrentQuizCreating.value
 
+    private val mCurrentUserQuizzes : MutableList<Quiz> = mutableListOf()
+    override val currentUserQuizzes: List<Quiz>
+        get() = mCurrentUserQuizzes.toList()
+
     private val mCurrentScore : MutableState<Int> = mutableStateOf(0)
 
     override val currentScore: Int
@@ -132,6 +136,36 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         }
 
     }
+    override fun loadQuizToEdit(quiz: Quiz){
+        mCurrentQuizCreating.value = quiz.toMutableQuiz()
+    }
+    override fun fetchCurrentUserQuizzes() {
+        Log.d(LOG_TAG, "Loading user's created quizzes ")
+        quizDatabaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val t = object: GenericTypeIndicator<HashMap<String, Quiz>?> (){}
+                val allQuizzes : HashMap<String, Quiz>? = snapshot.getValue(t)
+                Log.d(LOG_TAG, "Quizzes fetched!")
+                if (allQuizzes != null) {
+                    val quizzesByUser : MutableList<Quiz> = mutableListOf()
+                    for (quiz : Quiz in allQuizzes.values!!){
+                        if (quiz.creatorID == user.uid){
+                            quizzesByUser.add(quiz)
+                        }
+                    }
+                    mCurrentUserQuizzes.clear()
+                    mCurrentUserQuizzes.addAll(quizzesByUser.toList())
+                }else{
+                    Log.d(LOG_TAG,"Failed to retrieve user's quiz data!")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+    }
+
     override fun onUserProfileSaved(name: String, username: String) {
         Log.d(LOG_TAG, "onUserProfileSaved called")
         val auth : FirebaseAuth = FirebaseAuth.getInstance()

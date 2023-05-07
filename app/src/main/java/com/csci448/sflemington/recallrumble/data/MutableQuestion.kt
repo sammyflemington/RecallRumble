@@ -24,4 +24,16 @@ class MutableQuestion (override val prompt : String, override val answerChoices 
         )
         return Question(mPrompt.value, answers, mCorrectAnswerIndex.value)
     }
+
+    fun hasEmptyField(): Boolean{
+        if (mPrompt.value.isEmpty()){
+            return true
+        }
+        mAnswerChoices.forEach{choice ->
+            if (choice.value.isEmpty()){
+                return true
+            }
+        }
+        return false
+    }
 }

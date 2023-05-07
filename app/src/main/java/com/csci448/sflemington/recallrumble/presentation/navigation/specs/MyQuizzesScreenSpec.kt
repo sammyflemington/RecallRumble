@@ -19,11 +19,11 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
-import com.csci448.sflemington.recallrumble.presentation.screens.QuizCreationScreen
+import com.csci448.sflemington.recallrumble.presentation.screens.MyQuizzesScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
-object QuizCreationScreenSpec : IScreenSpec {
-    override val route = "quizCreation"
+object MyQuizzesScreenSpec : IScreenSpec {
+    override val route = "myQuizzes"
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args : String?) = route
     override val title : Int = R.string.app_name
@@ -35,33 +35,14 @@ object QuizCreationScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        QuizCreationScreen(quiz = viewModel.currentQuizCreating, onQuizSaved = {
-            if (viewModel.currentQuizCreating.hasEmptySlot()){
-                Toast.makeText(context, "Quiz has empty field, failed to submit.", Toast.LENGTH_LONG).show()
-            }else{
-                viewModel.saveQuiz()
-            }
-
+        MyQuizzesScreen(viewModel, viewModel.currentUserQuizzes, onQuizClicked={
+            viewModel.loadQuizToEdit(it)
+            navController.navigate(QuizCreationScreenSpec.route)
         })
     }
 
     @Composable
     override fun TopAppBarActions(viewModel: IViewModel, navController: NavHostController, navBackStackEntry: NavBackStackEntry?, context: Context){
-        val context = LocalContext.current
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = "Cancel", modifier = Modifier.clickable {
-                Toast.makeText(context, "Quiz creation cancelled", Toast.LENGTH_SHORT).show()
-                navController.popBackStack()
-            } )
-            Text(text = "Save", modifier = Modifier.clickable {
-                viewModel.saveQuiz()
-                Toast.makeText(context,"Quiz saved", Toast.LENGTH_SHORT).show()
-                navController.navigate(QuizCreationLandingPageSpec.buildRoute())
-            })
-        }
+
     }
 }
