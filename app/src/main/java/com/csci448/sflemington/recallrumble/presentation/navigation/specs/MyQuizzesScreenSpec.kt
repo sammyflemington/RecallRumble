@@ -26,7 +26,7 @@ object MyQuizzesScreenSpec : IScreenSpec {
     override val route = "myQuizzes"
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args : String?) = route
-    override val title : Int = R.string.app_name
+    override val title : Int = R.string.my_quizzes
     override val icon = Icons.Filled.Create
     @Composable
     override fun Content(
@@ -37,6 +37,9 @@ object MyQuizzesScreenSpec : IScreenSpec {
     ) {
         MyQuizzesScreen(viewModel, viewModel.currentUserQuizzes, onQuizClicked={
             viewModel.loadQuizToEdit(it)
+            navController.navigate(QuizCreationScreenSpec.route)
+        }, onCreateQuiz = {
+            viewModel.createNewQuiz()
             navController.navigate(QuizCreationScreenSpec.route)
         })
     }

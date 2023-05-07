@@ -20,7 +20,7 @@ interface IViewModel {
     val currentQuizCreating : MutableQuiz
     val currentUserQuizzes: List<Quiz>
     val currentGameCreator: String
-
+    val newBestScore : Boolean
     fun onUserProfileSaved (name: String, username: String)
     fun newQuizPlay(quizPlay: QuizPlay)
     fun setViewedUser(user: User)
@@ -33,4 +33,5 @@ interface IViewModel {
     fun fetchQuizFromCategory(category: Int)
     fun loadQuizToEdit(quiz: Quiz)
     fun fetchCurrentUserQuizzes()
+    fun updateGameResults()
 }

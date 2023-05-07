@@ -44,12 +44,12 @@ fun QuestionDisplayGame(view: IViewModel, onCorrectAnswer : ()->Unit, onWrongAns
                         onButtonClick = {
                             if (index == view.currentQuestionState!!.correctAnswerIndex) {
                                 onCorrectAnswer()
-                                Toast.makeText(currentContext, "CORRECT! Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
-                                    .show()
+//                                Toast.makeText(currentContext, "CORRECT! Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
+//                                    .show()
                             } else {
                                 onWrongAnswer()
-                                Toast.makeText(currentContext, "INCORRECT Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
-                                    .show()
+//                                Toast.makeText(currentContext, "INCORRECT Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
+//                                    .show()
                             }
                         }
                     )

@@ -8,6 +8,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.sflemington.recallrumble.R
+import com.csci448.sflemington.recallrumble.data.QuizPlay
 import com.csci448.sflemington.recallrumble.presentation.screens.CategoryListScreen
 import com.csci448.sflemington.recallrumble.presentation.screens.CreateAccountScreen
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
@@ -26,7 +27,13 @@ object CategoryListScreenSpec : IScreenSpec {
         context: Context
     ) {
         CategoryListScreen(viewModel.categoryList, {
+
+            if (viewModel.currentGame != null){
+                viewModel.newQuizPlay(QuizPlay(viewModel.currentGame!!.quiz, viewModel.user, 0))
+            }
             viewModel.fetchQuizFromCategory(it)
+
+
             navController.navigate("gameScreen")
 
                                                    }, view = viewModel)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -22,8 +23,19 @@ import com.csci448.sflemington.recallrumble.data.Quiz
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 
 @Composable
-fun MyQuizzesScreen(viewModel : IViewModel, myQuizzes: List<Quiz>, onQuizClicked: (Quiz)->Unit){
+fun MyQuizzesScreen(viewModel : IViewModel, myQuizzes: List<Quiz>, onQuizClicked: (Quiz)->Unit, onCreateQuiz: ()->Unit){
+
     LazyColumn{
+        if (myQuizzes.isEmpty()){
+            item{
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("You haven't created any quizzes!")
+                Button(onClick = {onCreateQuiz()}, modifier = Modifier.fillMaxWidth().padding(8.dp)){
+                    Text("Create one!")
+                }
+            }
+
+        }
         itemsIndexed(myQuizzes){i, quiz->
             Spacer(modifier = Modifier.height(8.dp))
             MyQuizzesListItem(quiz = quiz){onQuizClicked(quiz)}

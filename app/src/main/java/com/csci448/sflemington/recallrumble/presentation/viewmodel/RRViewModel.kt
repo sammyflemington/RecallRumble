@@ -27,12 +27,14 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     private var mLeaderboard = leaderBoard.toMutableStateList()
 
     private val mCategoryList = CategoryRepository.categoryList
-
+    private val mNewBestScore: MutableState<Boolean> = mutableStateOf(false)
+    override val newBestScore : Boolean
+        get() = mNewBestScore.value
     override val user: User
         get() = mUser.value
 
     override val leaderBoard: List<User>
-        get() = mLeaderboard.toList().sortedBy { it.rank }
+        get() = mLeaderboard.toList().sortedBy { -it.bestScoresByCategory.values.sum() ?: 0 }
 
     override val categoryList: List<Category>
         get() = mCategoryList
@@ -201,10 +203,11 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     }
 
     override fun newQuizPlay(quizPlay: QuizPlay) {
-
+        mCurrentQuestionIndex.value = 0
         mCurrentGame.value = quizPlay
         mCurrentQuestion.value = quizPlay.quiz.questionList[mCurrentQuestionIndex.value]
         mCurrentScore.value = 0
+
 
         quizDatabaseReference.child(mCurrentGame.value!!.quiz.creatorID).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -227,6 +230,7 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     }
 
     override fun fetchQuizFromCategory(category: Int) {
+
         Log.d(LOG_TAG, "Loading quiz from category " + category.toString())
         quizDatabaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -291,7 +295,39 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
         )
         mCurrentQuizCreating.value.creatorID.value = user.uid.toString()
     }
+    override fun updateGameResults(){
+        Log.d(LOG_TAG, "onUserProfileSaved called")
+        val auth : FirebaseAuth = FirebaseAuth.getInstance()
+        val uid : String? = auth.currentUser?.uid
+        val oldBest = user.bestScoresByCategory[mCurrentGame.value?.quiz?.category?.category.toString()]
+        mNewBestScore.value = oldBest != null && oldBest < mCurrentScore.value
 
+        user.bestScoresByCategory[mCurrentGame.value?.quiz?.category?.category.toString()] = mCurrentScore.value
+
+        mUser.value = User(
+            name = user.name,
+            username = user.username,
+            user.friends,
+            user.rank,
+            user.gamesWon,
+            user.gamesLost,
+            uid = uid,
+            bestScoresByCategory = user.bestScoresByCategory
+        )
+
+        if (uid != null){
+            userDatabaseReference.child(uid).setValue(mUser.value).addOnCompleteListener{
+                if (it.isSuccessful){
+                    Log.d(LOG_TAG, "Profile updated successfully!")
+                    //Toast.makeText(this.c, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+                }else{
+                    Log.d(LOG_TAG, "Profile failed to update.")
+                    //Toast.makeText(currentCompositionLocalContext, "Failed to update profile", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        //mCurrentViewedUser.value = null
+    }
     override fun onCorrectAnswer(){
         if (mCurrentGame.value != null){
             mCurrentGame.value!!.player1Score += 1
@@ -304,14 +340,37 @@ class RRViewModel(user: User, leaderBoard: List<User>) : ViewModel(), IViewModel
     }
 
     fun nextQuestion(){
-        if (mCurrentQuestionIndex.value <= 5) {
-            mCurrentQuestionIndex.value += 1
+        mCurrentQuestionIndex.value += 1
+        if (mCurrentQuestionIndex.value < 5) {
+
             if (mCurrentGame.value?.quiz != null){
                 mCurrentQuestion.value = mCurrentGame.value?.quiz!!.questionList[mCurrentQuestionIndex.value]
             }
         }
+
     }
     override fun updateLeaderboard() {
+        Log.d(LOG_TAG, "Fetching leaderboard data...")
+        userDatabaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val t = object: GenericTypeIndicator<HashMap<String, User>?> (){}
+                val allUsers : HashMap<String, User>? = snapshot.getValue(t)
+                Log.d(LOG_TAG, "Quizzes fetched!")
+                if (allUsers != null) {
+
+                    mLeaderboard.clear()
+                    allUsers.values.toList().forEach{user->
+                        mLeaderboard.add(user)
+                    }
+                }else{
+                    Log.d(LOG_TAG,"Failed to retrieve leaderboard!")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(LOG_TAG, error.toString())
+            }
+        })
 //        userDatabaseReference.get().addOnSuccessListener { userList -> // List<Question>
 //            val tempList: MutableList<User> = mutableListOf()
 //            val t : GenericTypeIndicator<HashMap<String, Object>> = GenericTypeIndicator()

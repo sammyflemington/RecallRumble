@@ -40,8 +40,8 @@ fun UserCardShort(user: User, onUserCardClicked : (User) -> Unit) {
                         .fillMaxWidth()
                         .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp)
                         .background(color = MaterialTheme.colorScheme.primaryContainer)) {
-                    Text(text = "Rank: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
-                    Text(text = user.rank.toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+                    Text(text = "Rating: ",fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
+                    Text(text = (user.bestScoresByCategory.values.sum() / user.bestScoresByCategory.values.size).toString(),fontSize = 16.sp,color = MaterialTheme.colorScheme.primary)
                 }
             }
 
