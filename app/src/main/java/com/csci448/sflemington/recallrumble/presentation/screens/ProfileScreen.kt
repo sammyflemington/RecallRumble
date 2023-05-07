@@ -7,6 +7,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -17,27 +19,42 @@ import com.csci448.sflemington.recallrumble.MainActivity
 import com.csci448.sflemington.recallrumble.R
 import com.csci448.sflemington.recallrumble.data.user.User
 import com.csci448.sflemington.recallrumble.presentation.components.UserCard
+import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
-fun ProfileScreen(user: User, viewedUser : User?, onEditProfileClicked : () -> Unit, onViewFriendsClicked : () -> Unit) {
+fun ProfileScreen(viewModel: IViewModel, user: User, viewedUser : User?, isViewedUserFollowed: Boolean, onFollowUserClicked: (String)->Unit, onEditProfileClicked : () -> Unit, onViewFriendsClicked : () -> Unit) {
     val context = LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
         if (viewedUser != null && user.uid != viewedUser.uid) {/* TODO: check if this player is in friends list. IF not, show "invite to friends list" instead*/
+            // viewing someone else
             UserCard(viewedUser)
             Button(
                 onClick = {
-                    Toast.makeText(
-                        context,
-                        "This feature is not supported... yet",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (isViewedUserFollowed) {
+                        Toast.makeText(
+                            context,
+                            "User unfollowed!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        onFollowUserClicked(viewedUser.uid.toString())
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "User followed!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        onFollowUserClicked(viewedUser.uid.toString())
+                    }
                 },
+
                 colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
             ) {
-                Text(text = stringResource(R.string.challenge_friend))
+                Text(if (isViewedUserFollowed) stringResource(R.string.unfollow) else stringResource(R.string.follow))
+
+
             }
         }else{
             UserCard(user)

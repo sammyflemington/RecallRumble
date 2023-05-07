@@ -15,7 +15,7 @@ import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 fun FriendsScreen(user: User, viewModel : IViewModel, navController: NavHostController) {
     Column() {
         Text(text = "Friends", fontSize = 28.sp)
-        user.friends?.let { UserList(userList = it, leaderboardFlag = false, navController = navController, viewModel = viewModel) }
+        user.following?.let { UserList(userList = viewModel.userFollowing, leaderboardFlag = false, navController = navController, viewModel = viewModel) }
     }
 }
 

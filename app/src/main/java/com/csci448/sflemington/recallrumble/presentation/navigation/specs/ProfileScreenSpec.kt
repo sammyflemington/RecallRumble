@@ -45,7 +45,7 @@ object ProfileScreenSpec : IScreenSpec{
     ) {
         Log.d(LOG_TAG, "CurrentViewUser: " + viewModel.currentViewedUser?.uid)
         Log.d(LOG_TAG, "User: " + viewModel.user.uid)
-        ProfileScreen(viewModel.user, viewedUser = viewModel.currentViewedUser, onEditProfileClicked = { navController.navigate(EditProfileScreenSpec.route) }, onViewFriendsClicked = { navController.navigate(FriendsScreenSpec.route)})
+        ProfileScreen(viewModel, viewModel.user, viewedUser = viewModel.currentViewedUser, isViewedUserFollowed = viewModel.isViewedUserFollowed, onFollowUserClicked = {viewModel.followUser(viewModel.currentViewedUser?.uid.toString())}, onEditProfileClicked = { navController.navigate(EditProfileScreenSpec.route) }, onViewFriendsClicked = { navController.navigate(FriendsScreenSpec.route)})
     }
 
     @Composable

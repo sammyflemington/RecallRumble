@@ -37,6 +37,12 @@ fun GameResultScreen(view: IViewModel) {
             fontWeight = FontWeight.Bold,
             color = Color.Red
         )
+        if (view.newBestScore){
+            Text("New Best!",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Red)
+        }
         Spacer(modifier = Modifier.height(50.dp))
         PulsatingMen()
     }

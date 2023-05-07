@@ -36,7 +36,7 @@ fun QuestionDisplayGame(view: IViewModel, onCorrectAnswer : ()->Unit, onWrongAns
         .background(color = Color.LightGray)
         .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        //Text(text =  view.currentQuestionState?.prompt ?: "Quiz not found", fontSize = 23.sp, textAlign = TextAlign.Center)
+        Text(text =  view.currentQuestionState?.prompt ?: "Quiz not found", fontSize = 23.sp, textAlign = TextAlign.Center)
         view.currentQuestionState?.answerChoices?.forEachIndexed { index, answer ->
                 Row() {
                     AnswerButton(
@@ -44,12 +44,12 @@ fun QuestionDisplayGame(view: IViewModel, onCorrectAnswer : ()->Unit, onWrongAns
                         onButtonClick = {
                             if (index == view.currentQuestionState!!.correctAnswerIndex) {
                                 onCorrectAnswer()
-                                Toast.makeText(currentContext, "CORRECT! Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
-                                    .show()
+//                                Toast.makeText(currentContext, "CORRECT! Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
+//                                    .show()
                             } else {
                                 onWrongAnswer()
-                                Toast.makeText(currentContext, "INCORRECT Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
-                                    .show()
+//                                Toast.makeText(currentContext, "INCORRECT Here you will battle head to head with opponents!", Toast.LENGTH_LONG)
+//                                    .show()
                             }
                         }
                     )

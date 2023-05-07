@@ -27,13 +27,15 @@ object GameScreenSpec : IScreenSpec {
             viewModel,
             onCorrect = {
                 viewModel.onCorrectAnswer()
-                if (viewModel.currentQuestionNumber == 5) {
+                if (viewModel.currentQuestionNumber >= 6) {
+                    viewModel.updateGameResults()
                     navController.navigate(GameResultsScreenSpec.buildRoute())
                 }
                         } ,
             onWrong = {
                 viewModel.onWrongAnswer()
-                if (viewModel.currentQuestionNumber == 5) {
+                if (viewModel.currentQuestionNumber >= 6) {
+                    viewModel.updateGameResults()
                     navController.navigate(GameResultsScreenSpec.buildRoute())
                 }
             })
