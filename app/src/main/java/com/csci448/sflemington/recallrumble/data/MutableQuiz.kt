@@ -20,7 +20,7 @@ class MutableQuiz (val title: MutableState<String>, val questionList: List<Mutab
                 return true
             }
         }
-        if (title.value.isEmpty()){
+        if (title.value == ""){
             return true
         }
         return false

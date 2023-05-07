@@ -36,11 +36,7 @@ object QuizCreationScreenSpec : IScreenSpec {
         context: Context
     ) {
         QuizCreationScreen(quiz = viewModel.currentQuizCreating, onQuizSaved = {
-            if (viewModel.currentQuizCreating.hasEmptySlot()){
-                Toast.makeText(context, "Quiz has empty field, failed to submit.", Toast.LENGTH_LONG).show()
-            }else{
-                viewModel.saveQuiz()
-            }
+
 
         })
     }
@@ -58,9 +54,13 @@ object QuizCreationScreenSpec : IScreenSpec {
                 navController.popBackStack()
             } )
             Text(text = "Save", modifier = Modifier.clickable {
-                viewModel.saveQuiz()
-                Toast.makeText(context,"Quiz saved", Toast.LENGTH_SHORT).show()
-                navController.navigate(QuizCreationLandingPageSpec.buildRoute())
+                if (viewModel.currentQuizCreating.hasEmptySlot()){
+                    Toast.makeText(context, "Quiz has empty field, failed to submit.", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(context,"Quiz saved", Toast.LENGTH_SHORT).show()
+                    viewModel.saveQuiz()
+                    navController.navigate(QuizCreationLandingPageSpec.buildRoute())
+                }
             })
         }
     }

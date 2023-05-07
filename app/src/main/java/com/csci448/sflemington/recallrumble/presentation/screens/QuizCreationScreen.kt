@@ -32,7 +32,6 @@ fun QuizCreationScreen(quiz : MutableQuiz, onQuizSaved: ()->Unit){
             Spacer(Modifier.height(10.dp))
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
