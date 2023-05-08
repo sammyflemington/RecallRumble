@@ -47,8 +47,8 @@ fun GameScreen(view: IViewModel, onCorrect : (Float) -> Unit, onWrong : () -> Un
     LaunchedEffect(key1 = view.currentGame){
         composableScope.launch {
             while (currentTime.value > 0){
-                delay(1000L)
-                currentTime.value -= 1000L
+                delay(100L)
+                currentTime.value -= 100L
                 timerValue.value = currentTime.value / totalTime.toFloat()
                 if (currentTime.value <= 0){
                     onWrong()
