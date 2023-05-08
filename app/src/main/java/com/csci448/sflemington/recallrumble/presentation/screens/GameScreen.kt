@@ -44,7 +44,7 @@ fun GameScreen(view: IViewModel, onCorrect : (Float) -> Unit, onWrong : () -> Un
     val currentTime = remember{mutableStateOf(totalTime)}
 
     val composableScope = rememberCoroutineScope()
-    LaunchedEffect(key1 = view.currentGame){
+    LaunchedEffect(key1 = view.isViewedUserFollowed){
         composableScope.launch {
             while (currentTime.value > 0){
                 delay(100L)

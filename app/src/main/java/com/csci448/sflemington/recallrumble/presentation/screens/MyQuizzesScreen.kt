@@ -54,10 +54,12 @@ fun MyQuizzesListItem(quiz: Quiz, onClick: (Quiz)->Unit){
                 Text(stringResource(quiz.category.category), fontSize = 16.sp)
             }
 
-            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.End){
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(quiz.plays.toString() + " play"+ if (quiz.plays != 1) "s" else "")
-            }
+                Column(verticalArrangement = Arrangement.Center){
+                    Spacer(modifier = Modifier.height(8.dp).align(Alignment.End).fillMaxWidth())
+                    Text(quiz.plays.toString() + " play"+ if (quiz.plays != 1) "s" else "", modifier = Modifier.align(Alignment.End).padding(8.dp))
+                }
+
+
 
 //            Box(modifier = Modifier.fillMaxHeight().align(Alignment.CenterVertically)){
 //                Text("Edit")
