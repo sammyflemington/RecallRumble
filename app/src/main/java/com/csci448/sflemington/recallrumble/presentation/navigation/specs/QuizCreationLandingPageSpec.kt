@@ -36,7 +36,7 @@ object QuizCreationLandingPageSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-        val context = LocalContext.current
+        //val context = LocalContext.current
         QuizCreationLandingPage(onCreateQuizClicked ={
             navController.navigate(QuizCreationScreenSpec.buildRoute())
             viewModel.createNewQuiz()
