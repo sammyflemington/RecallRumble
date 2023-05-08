@@ -24,11 +24,6 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.continueAsGuest.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.buttonRegister.setOnClickListener {
             val email = binding.email.text.toString()
             val pass = binding.password.text.toString()
