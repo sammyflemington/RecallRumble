@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
+import com.csci448.sflemington.recallrumble.MyFirebaseMessagingService
 import com.csci448.sflemington.recallrumble.data.*
 import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
@@ -187,6 +188,7 @@ class RRViewModel(user: User, leaderboard: List<User>) : ViewModel(), IViewModel
         val auth : FirebaseAuth = FirebaseAuth.getInstance()
         val uid : String? = auth.currentUser?.uid
         val following : MutableList<String> = user.following.toMutableList()
+        val notif = MyFirebaseMessagingService()
         if (id !in following){
             following.add(id)
             mIsViewedUserFollowed.value = true
@@ -208,6 +210,7 @@ class RRViewModel(user: User, leaderboard: List<User>) : ViewModel(), IViewModel
             userDatabaseReference.child(uid).setValue(mUser.value).addOnCompleteListener{
                 if (it.isSuccessful){
                     Log.d(LOG_TAG, "Profile updated successfully!")
+
                     //Toast.makeText(this.c, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
                 }else{
                     Log.d(LOG_TAG, "Profile failed to update.")
