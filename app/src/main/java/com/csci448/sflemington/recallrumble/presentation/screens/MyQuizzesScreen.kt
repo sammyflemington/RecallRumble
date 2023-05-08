@@ -1,5 +1,6 @@
 package com.csci448.sflemington.recallrumble.presentation.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -49,15 +50,17 @@ fun MyQuizzesListItem(quiz: Quiz, onClick: (Quiz)->Unit){
     Card(modifier = Modifier.fillMaxWidth().clickable{onClick(quiz)}){
         Row(){
             Spacer(modifier = Modifier.width(8.dp))
+            //Image(painter = painterResource(id = quiz.category.graphic), contentDescription = "", modifier = Modifier.size(64.dp))
+            //Spacer(modifier = Modifier.width(16.dp))
             Column(){
                 Text(quiz.title, fontSize = 24.sp)
-                Text(stringResource(quiz.category.category), fontSize = 16.sp)
+                Text(stringResource(quiz.category.graphic), fontSize = 16.sp)
             }
 
-                Column(verticalArrangement = Arrangement.Center){
-                    Spacer(modifier = Modifier.height(8.dp).align(Alignment.End).fillMaxWidth())
-                    Text(quiz.plays.toString() + " play"+ if (quiz.plays != 1) "s" else "", modifier = Modifier.align(Alignment.End).padding(8.dp))
-                }
+            Column(verticalArrangement = Arrangement.Center){
+                Spacer(modifier = Modifier.height(8.dp).align(Alignment.End).fillMaxWidth())
+                Text(quiz.plays.toString() + " play"+ if (quiz.plays != 1) "s" else "", modifier = Modifier.align(Alignment.End).padding(8.dp))
+            }
 
 
 

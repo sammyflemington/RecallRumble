@@ -37,7 +37,7 @@ fun CategoryListScreen(categories: List<Category>, selectCategory: (Int) -> Unit
             items(categories) {
                 Card(modifier = Modifier
                     .padding(11.dp)
-                    .height(160.dp)
+                    .height(180.dp)
                     .clickable {
                         //val questions = listOf<Question>(Question(answerChoices = listOf("Apple", "Banana")), Question(answerChoices = listOf("", " ")), Question(answerChoices = listOf("", " ")))
 //                        val quiz = Quiz("myQuiz", it.questionList, it)
@@ -53,10 +53,10 @@ fun CategoryListScreen(categories: List<Category>, selectCategory: (Int) -> Unit
                     {
                         Text(
                             text = stringResource(id = it.category),
-                            fontSize = 23.sp,
+                            fontSize = 20.sp,
                             textAlign = TextAlign.Center
                         )
-                        Image(painter = painterResource(id = it.graphic), contentDescription = "")
+                        Image(painter = painterResource(id = it.graphic), contentDescription = "", modifier = Modifier.size(120.dp))
                         Text("My best: ${view.user.bestScoresByCategory[it.category.toString()].toString()}")
                     }
                 }
