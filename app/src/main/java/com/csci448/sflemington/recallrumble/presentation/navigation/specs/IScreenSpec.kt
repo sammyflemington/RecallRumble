@@ -52,6 +52,7 @@ sealed interface IScreenSpec {
                     NavigationBarItem(
                         selected = selected,
                         onClick = {
+                            navController.popBackStack()
                             navController.navigate(screen.buildRoute(viewModel.user.uid.toString()))
                             Log.d(LOG_TAG,"setViewedUser() called")
                             viewModel.setViewedUser(viewModel.user)

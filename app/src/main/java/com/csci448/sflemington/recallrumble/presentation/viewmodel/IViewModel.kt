@@ -30,7 +30,7 @@ interface IViewModel {
     fun createNewQuiz()
     fun updateLeaderboard()
 
-    fun onCorrectAnswer()
+    fun onCorrectAnswer(time: Float)
     fun onWrongAnswer()
     fun fetchQuizFromCategory(category: Int)
     fun loadQuizToEdit(quiz: Quiz)

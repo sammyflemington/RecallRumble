@@ -2,14 +2,17 @@ package com.csci448.sflemington.recallrumble.presentation.screens
 
 import android.media.MediaPlayer
 import android.widget.Toast
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.runtime.*
 //import com.csci448.sflemington.recallrumble.presentation.components.QuestionDisplayGame
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PaintingStyle.Companion.Stroke
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -25,14 +28,39 @@ import com.csci448.sflemington.recallrumble.presentation.components.AnswerButton
 import com.csci448.sflemington.recallrumble.presentation.components.QuestionDisplayGame
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.IViewModel
 import com.csci448.sflemington.recallrumble.presentation.viewmodel.RRViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @Composable
 //Do we want an IViewModel or an RRViewModel?
-fun GameScreen(view: IViewModel, onCorrect : () -> Unit, onWrong : () -> Unit) {
+fun GameScreen(view: IViewModel, onCorrect : (Float) -> Unit, onWrong : () -> Unit) {
     val orientation = LocalConfiguration.current.orientation
     val currentContext = LocalContext.current
     val mMediaPlayerDing = MediaPlayer.create(currentContext, R.raw.ding)
     val mMediaPlayerBoo = MediaPlayer.create(currentContext, R.raw.boo)
+    val totalTime : Float = 15.0f * 1000f // 10 seconds
+    val timerValue = remember{mutableStateOf(10.0f)}
+    val currentTime = remember{mutableStateOf(totalTime)}
+
+    val composableScope = rememberCoroutineScope()
+    LaunchedEffect(key1 = view.currentGame){
+        composableScope.launch {
+            while (currentTime.value > 0){
+                delay(1000L)
+                currentTime.value -= 1000L
+                timerValue.value = currentTime.value / totalTime.toFloat()
+                if (currentTime.value <= 0){
+                    onWrong()
+                    mMediaPlayerBoo.start()
+                    currentTime.value = totalTime
+                }
+            }
+
+        }
+    }
+
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -76,16 +104,30 @@ fun GameScreen(view: IViewModel, onCorrect : () -> Unit, onWrong : () -> Unit) {
             //Time
         }
             //Text(text = stringResource(view.currentGame?.quiz?.category?.category ?: 0), fontSize = 33.sp)
+//            Box(contentAlignment = Alignment.Center, modifier = Modifier.size(64.dp, 64.dp)){
+//                Canvas(modifier = Modifier.size(64.dp)){
+//                    drawArc(
+//                        color = Color.Blue,
+//                        startAngle = -215f,
+//                        sweepAngle = 250f * timerValue.value,
+//                        useCenter = false,
+//                        size = Size(64f, 64f)
+//                    )
+//                }
+//            }
+            Text((currentTime.value / 1000f).roundToInt().toString(), fontSize = 24.sp)
             Text(text = "${view.currentQuestionNumber} / ${view.currentGame?.quiz?.quizQuestionCount}", fontSize = 23.sp)
 
             QuestionDisplayGame(
                 view,
                 onCorrectAnswer = {
-                    onCorrect()
+                    onCorrect(timerValue.value)
+                    currentTime.value = totalTime
                     mMediaPlayerDing.start()
                                   },
                 onWrongAnswer = {
                     onWrong()
+                    currentTime.value = totalTime
                     mMediaPlayerBoo.start()
                 })
     }

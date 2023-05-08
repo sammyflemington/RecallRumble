@@ -53,8 +53,8 @@ fun MyQuizzesListItem(quiz: Quiz, onClick: (Quiz)->Unit){
                 Text(quiz.title, fontSize = 24.sp)
                 Text(stringResource(quiz.category.category), fontSize = 16.sp)
             }
-            Spacer(modifier = Modifier.width(128.dp))
-            Column(verticalArrangement = Arrangement.Center){
+
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.End){
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(quiz.plays.toString() + " play"+ if (quiz.plays != 1) "s" else "")
             }

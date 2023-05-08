@@ -12,6 +12,8 @@ import com.csci448.sflemington.recallrumble.data.user.RRRepo
 import com.csci448.sflemington.recallrumble.data.user.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.lang.Math.round
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 class RRViewModel(user: User, leaderboard: List<User>) : ViewModel(), IViewModel {
@@ -391,11 +393,11 @@ class RRViewModel(user: User, leaderboard: List<User>) : ViewModel(), IViewModel
 
         //mCurrentViewedUser.value = null
     }
-    override fun onCorrectAnswer(){
+    override fun onCorrectAnswer(time : Float){
         if (mCurrentGame.value != null){
             mCurrentGame.value!!.player1Score += 1
         }
-        mCurrentScore.value += 1000
+        mCurrentScore.value += (1000f * (time)).roundToInt()
         nextQuestion()
     }
     override fun onWrongAnswer() {

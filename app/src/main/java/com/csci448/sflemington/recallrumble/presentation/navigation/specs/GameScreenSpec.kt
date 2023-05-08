@@ -26,7 +26,7 @@ object GameScreenSpec : IScreenSpec {
         GameScreen(
             viewModel,
             onCorrect = {
-                viewModel.onCorrectAnswer()
+                viewModel.onCorrectAnswer(it)
                 if (viewModel.currentQuestionNumber >= 6) {
                     viewModel.updateGameResults()
                     navController.navigate(GameResultsScreenSpec.buildRoute())
