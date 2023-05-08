@@ -45,7 +45,7 @@ sealed interface IScreenSpec {
                 bottomNavItems.forEach{ screen->
                     var selected = false
                     if (navBackStackEntry != null){
-                        if (screen.buildRoute(viewModel.user.uid.toString()) == navBackStackEntry.destination.route){
+                        if (screen.buildRoute("uuid") == navBackStackEntry.destination.route){
                             selected = true
                         }
                     }
