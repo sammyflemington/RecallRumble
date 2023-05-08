@@ -40,13 +40,13 @@ fun StartGameScreen(onStartGameClicked : () -> Unit, onInviteFriendClicked: () -
             }
         }
         Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = {onInviteFriendClicked()},
-            contentPadding = PaddingValues(20.dp),
-            shape = RoundedCornerShape(10.dp)
-        ){
-            Text(text = "Challenge a Friend", fontSize = 20.sp)
-        }
+//        Button(
+//            onClick = {onInviteFriendClicked()},
+//            contentPadding = PaddingValues(20.dp),
+//            shape = RoundedCornerShape(10.dp)
+//        ){
+//            Text(text = "Challenge a Friend", fontSize = 20.sp)
+//        }
     }
 }
 

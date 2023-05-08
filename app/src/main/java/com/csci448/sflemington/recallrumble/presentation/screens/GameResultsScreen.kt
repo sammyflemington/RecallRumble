@@ -29,7 +29,7 @@ fun GameResultScreen(view: IViewModel) {
         Text(text = "Results", fontSize = 50.sp)
         Text(text = "Quiz: " + view.currentGame?.quiz?.title, fontSize = 20.sp)
         Text(text = "Category: " + stringResource(id = view.currentGame?.quiz?.category?.category!!), fontSize = 20.sp)
-        Text(text = "Created By: " + view.currentGameCreator, fontSize = 20.sp)
+        //Text(text = "Created By: " + view.currentGameCreator, fontSize = 20.sp)
         Text(text = "Final Score", fontSize = 20.sp)
         Text(
             text = view.currentScore.toString(),
