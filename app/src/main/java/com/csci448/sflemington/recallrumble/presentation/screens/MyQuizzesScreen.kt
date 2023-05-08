@@ -54,7 +54,7 @@ fun MyQuizzesListItem(quiz: Quiz, onClick: (Quiz)->Unit){
             //Spacer(modifier = Modifier.width(16.dp))
             Column(){
                 Text(quiz.title, fontSize = 24.sp)
-                Text(stringResource(quiz.category.graphic), fontSize = 16.sp)
+                Text(stringResource(quiz.category.category), fontSize = 16.sp)
             }
 
             Column(verticalArrangement = Arrangement.Center){
